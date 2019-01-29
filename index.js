@@ -1,8 +1,11 @@
 const express = require("express");
-const app = express();
 const compression = require("compression");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
+const bcrypt = require("./bcrypt");
+const db = require("./db");
+
+const app = express();
 
 app.use(compression());
 
@@ -18,7 +21,7 @@ app.use(
     })
 );
 
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "./public"));
 
 if (process.env.NODE_ENV != "production") {
     app.use(
@@ -31,8 +34,30 @@ if (process.env.NODE_ENV != "production") {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
 
+//---------missing hashed password business--------------
+app.post("/register", (req, res) => {
+    bcrypt.hashPassword(req.body.password).then(hash => {
+        db.registerUser(req.body.first, req.body.last, req.body.email, hash);
+    });
+});
+
+//---server routes:
+
+app.get("/welcome", function(req, res) {
+    if (req.session.userId) {
+        res.redirect("/");
+    } else {
+        res.sendFile(__dirname + "/index.html");
+    }
+});
+
+//this has to be at the nend
 app.get("*", function(req, res) {
-    res.sendFile(__dirname + "/index.html");
+    if (!req.session.userId) {
+        res.redirect("/welcome");
+    } else {
+        res.sendFile(__dirname + "/index.html");
+    }
 });
 
 app.listen(8080, function() {
