@@ -13,3 +13,12 @@ module.exports.registerUser = (first, last, email, hash) => {
         [first, last, email, hash]
     );
 };
+
+module.exports.getUserInfo = function(email) {
+    return db.query(
+        `SELECT *
+        FROM users
+        WHERE email = $1`,
+        [email]
+    );
+};
