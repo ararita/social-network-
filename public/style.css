@@ -1,0 +1,10 @@
+.modal {
+    background: red;
+    width: 90%;
+    height: 500px;
+}
+
+#profilepic img {
+    width: 250px;
+    height: 250px;
+}

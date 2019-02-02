@@ -21,5 +21,3 @@ export function Welcome() {
         </div>
     );
 }
-
-ReactDOM.render(Register, document.querySelector("main"));

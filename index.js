@@ -5,7 +5,31 @@ const cookieSession = require("cookie-session");
 const bcrypt = require("./bcrypt");
 const db = require("./db");
 const csurf = require("csurf");
+const multer = require("multer");
+const uidSafe = require("uid-safe");
+const path = require("path");
 const app = express();
+const config = require("./config");
+
+const diskStorage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function(req, file, callback) {
+        uidSafe(24).then(function(uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    }
+});
+
+const uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152
+    }
+});
+
+const s3 = require("./s3");
 
 app.use(compression());
 
@@ -41,6 +65,7 @@ if (process.env.NODE_ENV != "production") {
 
 app.get("/welcome", function(req, res) {
     if (req.session.userId) {
+        console.log("req.session.userId: ", req.session.userId);
         res.redirect("/");
     } else {
         res.sendFile(__dirname + "/index.html");
@@ -74,7 +99,7 @@ app.post("/register", (req, res) => {
 
 app.post("/login", (req, res) => {
     let userId;
-    db.getUserInfo(req.body.email)
+    db.getUserByEmail(req.body.email)
         .then(dbResult => {
             req.session.email = dbResult.rows[0].email;
             if (dbResult.rows[0]) {
@@ -96,6 +121,29 @@ app.post("/login", (req, res) => {
             res.json({ success: false });
             console.log(err);
         });
+});
+
+app.get("/user", (req, res) => {
+    let userId = req.session.userId;
+    db.getUserProfile(userId)
+        .then(dbResult => {
+            res.json(dbResult.rows[0]);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
+app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+    let userId = req.session.userId;
+
+    // console.log("POST /upload");
+    // console.log("req body: ", req.body);
+    // console.log("req file: ", req.file);
+    db.addImage(userId, config.s3Url + req.file.filename).then(({ rows }) => {
+        console.log("rows: ", rows);
+        res.json(rows[0]);
+    });
 });
 
 //this has to be at the end
