@@ -127,10 +127,24 @@ app.get("/user", (req, res) => {
     let userId = req.session.userId;
     db.getUserProfile(userId)
         .then(dbResult => {
+            console.log("dbresults: ", dbResult);
             res.json(dbResult.rows[0]);
         })
         .catch(err => {
             console.log(err);
+        });
+});
+
+app.post("/bio", (req, res) => {
+    const userId = req.session.userId;
+    const bio = req.body.text;
+
+    db.updateBio(userId, bio)
+        .then(() => {
+            res.json({ bio });
+        })
+        .catch(err => {
+            res.status(500).json({ err });
         });
 });
 

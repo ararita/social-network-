@@ -7,5 +7,6 @@ CREATE TABLE users(
     email VARCHAR(200) UNIQUE NOT NULL CHECK (email <> ''),
     password VARCHAR(200) NOT NULL CHECK (password <> ''),
     url VARCHAR(300),
+    bio VARCHAR(1000),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

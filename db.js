@@ -45,3 +45,12 @@ module.exports.addImage = function(userId, url) {
         [userId, url]
     );
 };
+
+module.exports.updateBio = function(userId, bio) {
+    return db.query(
+        `UPDATE users
+        SET bio = $2
+        WHERE id = $1`,
+        [userId, bio]
+    );
+};
