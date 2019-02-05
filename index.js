@@ -160,6 +160,11 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     });
 });
 
+app.get("/user/:id/info", (req, res) => {
+    db.getUserById(req.params.id).then(dbResult => {
+        res.json(dbResult.rows[0]);
+    });
+});
 //this has to be at the end
 app.get("*", function(req, res) {
     if (!req.session.userId) {

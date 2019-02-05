@@ -54,3 +54,11 @@ module.exports.updateBio = function(userId, bio) {
         [userId, bio]
     );
 };
+
+module.exports.getUserById = function(userId) {
+    return db.query(
+        `SELECT * FROM users
+        WHERE id = $1`,
+        [userId]
+    );
+};
