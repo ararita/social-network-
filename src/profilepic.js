@@ -1,6 +1,6 @@
 import React from "React";
 
-export function ProfilePic(props) {
+export default function ProfilePic(props) {
     console.log("confirm: ", props);
     let imageUrl;
 
