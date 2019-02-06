@@ -1,10 +1,11 @@
 import React from "react";
-import { Logo } from "./logo";
+import Logo from "./logo";
 import axios from "./axios";
 import { ProfilePic } from "./profilepic";
 import Uploader from "./uploader";
 import { Profile } from "./profile";
 import OtherProfile from "./otherprofile";
+import Header from "./header";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 export default class App extends React.Component {
@@ -75,56 +76,36 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <BrowserRouter>
-                <div>
-                    <Logo />
-                    <ProfilePic
-                        className="profile-pic-small"
-                        first={this.state.first}
-                        last={this.state.last}
-                        profilePicUrl={this.state.profilePicUrl}
-                        showUploader={this.showUploader}
-                    />
-                    {this.state.uploaderIsVisible && (
-                        <Uploader updateProfileUrl={this.updateProfileUrl} />
-                    )}
-                    <Route
-                        exact
-                        path="/"
-                        render={() => (
-                            <Profile
-                                bio={this.state.bio}
-                                first={this.state.first}
-                                last={this.state.last}
-                                profilePicUrl={this.state.profilePicUrl}
-                                onUpdateBio={this.onUpdateBio}
+            <div>
+                <Header
+                    showUploader={this.showUploader}
+                    profilePicUrl={this.state.profilePicUrl}
+                    updateProfileUrl={this.updateProfileUrl}
+                />
+                <BrowserRouter>
+                    <div>
+                        {this.state.uploaderIsVisible && (
+                            <Uploader
+                                updateProfileUrl={this.updateProfileUrl}
                             />
                         )}
-                    />
-                    <Route path="/user/:id" component={OtherProfile} />
-                </div>
-            </BrowserRouter>
+                        <Route
+                            exact
+                            path="/"
+                            render={() => (
+                                <Profile
+                                    bio={this.state.bio}
+                                    first={this.state.first}
+                                    last={this.state.last}
+                                    profilePicUrl={this.state.profilePicUrl}
+                                    onUpdateBio={this.onUpdateBio}
+                                />
+                            )}
+                        />
+                        <Route path="/user/:id" component={OtherProfile} />
+                    </div>
+                </BrowserRouter>
+            </div>
         );
     }
 }
-
-// <BrowserRouter>
-//     <div>
-//         <Route
-//             exact
-//             path="/"
-//             render={() => (
-//                 <Profile
-//                     id={this.state.id}
-//                     first={this.state.first}
-//                     last={this.state.last}
-//                     image={this.state.image}
-//                     onClick={this.showUploader}
-//                     bio={this.state.bio}
-//                     setBio={this.setBio}
-//                 />
-//             )}
-//         />
-//         <Route path="/user/:id" component={OtherProfile} />
-//     </div>
-// </BrowserRouter>
