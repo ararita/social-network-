@@ -1,29 +1,54 @@
-.modal {
+/* .modal {
     background: red;
     width: 100%;
     height: 100%;
     position: absolute;
     z-index: 10;
+} */
+
+.modal {
+    width: 80%;
+    height: 65%;
+    position: absolute;
+    top: 27%;
+    left: 10%;
+    border-radius: 10px;
+
+    /* background-color: #000000b1; */
+
+    background: linear-gradient(#323335, #848485);
 }
 
 /* #profilepic img {
     width: 250px;
     height: 250px;
 } */
+.logo {
+    width: 200px;
+    height: 200px;
+}
 
 main {
-    width: 100%;
     margin: 0 auto;
 }
 
 .profile-pic-small {
-    width: 64px;
-    transform: translate(1173%, -420%);
-    border-radius: 10px;
+    width: 70px;
+    position: relative;
+    top: 2px;
+    left: 20px;
+    border-radius: 35px;
 }
 
 .profile-pic-big {
-    border-radius: 18px;
+    border-radius: 5px;
     max-width: 250px;
     /* transform: translate(-05%, -27%); */
+}
+
+body {
+    font-family: Helvetica;
+    background-color: white;
+    box-sizing: border-box;
+    margin: 0;
 }
