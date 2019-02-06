@@ -62,3 +62,24 @@ module.exports.getUserById = function(userId) {
         [userId]
     );
 };
+
+module.exports.getInitialFriendship = function(loggedInId, otherUserId) {
+    return db.query(
+        `
+      SELECT * FROM friendships
+      WHERE (recipient_id = $1 AND sender_id = $2)
+      OR (recipient_id = $2 AND sender_id = $1)
+  `,
+        [loggedInId, otherUserId]
+    );
+};
+
+module.exports.addFriend = function(loggedInId, otherUserId) {
+    return db.query(
+        `
+  INSERT INTO friendships (sender_id, recipient_id)
+  VALUES($1, $2)
+  `,
+        [loggedInId, otherUserId]
+    );
+};
