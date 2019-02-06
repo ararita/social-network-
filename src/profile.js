@@ -1,5 +1,5 @@
 import React from "react";
-import { ProfilePic } from "./profilepic";
+import ProfilePic from "./profilepic";
 import { BioEditor } from "./bioeditor";
 
 export function Profile(props) {
