@@ -165,6 +165,19 @@ app.get("/user/:id/info", (req, res) => {
         res.json(dbResult.rows[0]);
     });
 });
+
+app.get("/initial-friendship-status/:id", (req, res) => {
+    db.getInitialFriendship(req.session.userId, req.params.id).then(data => {
+        res.json({ data: data.rows, user: req.session.userId });
+    });
+    //req.params.id je user koji nismo mi
+});
+
+//-----------------------finish post requests-------------------------
+app.post("/initial-friendship-status/:id/add-friend", (req, res) =>
+    db.addFriend(req.session.userId, req.params.id).then()
+);
+
 //this has to be at the end
 app.get("*", function(req, res) {
     if (!req.session.userId) {
