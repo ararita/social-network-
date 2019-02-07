@@ -83,3 +83,36 @@ module.exports.addFriend = function(loggedInId, otherUserId) {
         [loggedInId, otherUserId]
     );
 };
+
+module.exports.unfriend = function(loggedInId, otherUserId) {
+    return db.query(
+        `
+        DELETE FROM friendships WHERE (recipient_id = $1 AND sender_id = $2)
+        OR (recipient_id = $2 AND sender_id = $1)
+  `,
+        [loggedInId, otherUserId]
+    );
+};
+
+module.exports.cancelFriendRequest = function(loggedInId, otherUserId) {
+    return db.query(
+        `
+  DELETE FROM friendships WHERE (recipient_id = $1 AND sender_id = $2)
+  OR (recipient_id = $2 AND sender_id = $1)
+  `,
+        [loggedInId, otherUserId]
+    );
+};
+
+module.exports.acceptFriendRequest = function(loggedInId, otherUserId) {
+    return db.query(
+        `
+UPDATE friendships
+SET accepted = true
+WHERE (recipient_id = $1 AND sender_id = $2)
+OR (recipient_id = $2 AND sender_id = $1)
+
+  `,
+        [loggedInId, otherUserId]
+    );
+};

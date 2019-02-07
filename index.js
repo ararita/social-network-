@@ -167,16 +167,38 @@ app.get("/user/:id/info", (req, res) => {
 });
 
 app.get("/initial-friendship-status/:id", (req, res) => {
-    db.getInitialFriendship(req.session.userId, req.params.id).then(data => {
-        res.json({ data: data.rows, user: req.session.userId });
-    });
+    db.getInitialFriendship(req.session.userId, req.params.id).then(
+        dbResult => {
+            res.json(dbResult.rows[0]);
+        }
+    );
     //req.params.id je user koji nismo mi
 });
 
-//-----------------------finish post requests-------------------------
-app.post("/initial-friendship-status/:id/add-friend", (req, res) =>
-    db.addFriend(req.session.userId, req.params.id).then()
-);
+app.post("/initial-friendship-status/:id/add-friend", (req, res) => {
+    db.addFriend(req.session.userId, req.params.id).then(dbResult => {
+        res.json(dbResult);
+    });
+});
+app.post("/initial-friendship-status/:id/unfriend", (req, res) => {
+    db.unfriend(req.session.userId, req.params.id).then(dbResult => {
+        res.json(dbResult);
+    });
+});
+
+app.post("/initial-friendship-status/:id/cancel-friend-request", (req, res) => {
+    db.cancelFriendRequest(req.session.userId, req.params.id).then(dbResult => {
+        res.json(dbResult);
+    });
+});
+
+app.post("/initial-friendship-status/:id/accept-friend-request", (req, res) => {
+    db.acceptFriendRequest(req.session.userId, req.params.id).then(dbResult => {
+        res.json(dbResult);
+    });
+});
+
+app.get("/friends", (req, res) => {});
 
 //this has to be at the end
 app.get("*", function(req, res) {
