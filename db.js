@@ -116,3 +116,15 @@ OR (recipient_id = $2 AND sender_id = $1)
         [loggedInId, otherUserId]
     );
 };
+
+module.exports.getFriendshipLists = function(id) {
+    return db.query(
+        `SELECT users.id, first, last, url, accepted
+        FROM friendships
+        JOIN users
+        ON (accepted = false AND recipient_id = $1 AND sender_id = users.id)
+        OR (accepted = true AND recipient_id = $1 AND sender_id = users.id)
+        OR (accepted = true AND sender_id = $1 AND recipient_id = users.id)`,
+        [id]
+    );
+};
