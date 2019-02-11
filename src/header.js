@@ -5,7 +5,7 @@ import Logo from "./logo";
 export default function Header(props) {
     return (
         <div>
-            <div className="header">
+            <div className="header-container">
                 <div className="logo-box">
                     <Logo />
                 </div>

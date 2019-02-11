@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "./logo";
+// import Logo from "./logo";
 import axios from "./axios";
 import { ProfilePic } from "./profilepic";
 import Uploader from "./uploader";
@@ -7,6 +7,7 @@ import { Profile } from "./profile";
 import OtherProfile from "./otherprofile";
 import Header from "./header";
 import { BrowserRouter, Route, Link } from "react-router-dom";
+import { ConnectedFriends } from "./friends";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -103,6 +104,10 @@ export default class App extends React.Component {
                             )}
                         />
                         <Route path="/user/:id" component={OtherProfile} />
+                        <Route
+                            path="/friends"
+                            render={() => <ConnectedFriends />}
+                        />
                     </div>
                 </BrowserRouter>
             </div>

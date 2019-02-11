@@ -105,7 +105,10 @@ export default class FriendButton extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.updateFriendship}>
+                <button
+                    className="friend-button"
+                    onClick={this.updateFriendship}
+                >
                     {this.state.buttonText}
                 </button>
             </div>
