@@ -198,7 +198,21 @@ app.post("/initial-friendship-status/:id/accept-friend-request", (req, res) => {
     });
 });
 
-app.get("/friends", (req, res) => {});
+app.get("/friends/list", (req, res) => {
+    db.getFriendshipLists(req.session.userId)
+        .then(dbInfo => {
+            console.log("dbInfo", dbInfo);
+            res.json(dbInfo);
+        })
+        .catch(err => {
+            console.log("error while getting friendshiplists: ", err);
+        });
+});
+
+app.get("/logout", (req, res) => {
+    req.session = null;
+    res.redirect("/welcome");
+});
 
 //this has to be at the end
 app.get("*", function(req, res) {
