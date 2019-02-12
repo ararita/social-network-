@@ -42,3 +42,27 @@ export function unFriend(friend_id) {
             };
         });
 }
+
+// SOCKET.IO ONLINE USERS
+
+export function allOnlineUsers(onlineUsers) {
+    console.log("AllOnlineUsers Action running: ", onlineUsers);
+    return {
+        type: "ONLINE_USERS",
+        onlineUsersList: onlineUsers
+    };
+}
+
+export function userWhoJoined(joinedUser) {
+    return {
+        type: "USER_WHO_JOINED",
+        joined: joinedUser
+    };
+}
+
+export function userWhoLeft(leftUser) {
+    return {
+        type: "USER_WHO_LEFT",
+        leftUser: leftUser
+    };
+}

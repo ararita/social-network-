@@ -1,13 +1,14 @@
 import React from "react";
 // import Logo from "./logo";
 import axios from "./axios";
-import { ProfilePic } from "./profilepic";
+import ProfilePic from "./profilepic";
 import Uploader from "./uploader";
 import { Profile } from "./profile";
 import OtherProfile from "./otherprofile";
 import Header from "./header";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
 import { ConnectedFriends } from "./friends";
+import { ConnectedOnlineUsers } from "./onlineusers";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -82,6 +83,8 @@ export default class App extends React.Component {
                     showUploader={this.showUploader}
                     profilePicUrl={this.state.profilePicUrl}
                     updateProfileUrl={this.updateProfileUrl}
+                    first={this.state.first}
+                    last={this.state.last}
                 />
                 <BrowserRouter>
                     <div>
@@ -90,24 +93,31 @@ export default class App extends React.Component {
                                 updateProfileUrl={this.updateProfileUrl}
                             />
                         )}
-                        <Route
-                            exact
-                            path="/"
-                            render={() => (
-                                <Profile
-                                    bio={this.state.bio}
-                                    first={this.state.first}
-                                    last={this.state.last}
-                                    profilePicUrl={this.state.profilePicUrl}
-                                    onUpdateBio={this.onUpdateBio}
-                                />
-                            )}
-                        />
-                        <Route path="/user/:id" component={OtherProfile} />
-                        <Route
-                            path="/friends"
-                            render={() => <ConnectedFriends />}
-                        />
+                        <Switch>
+                            <Route
+                                exact
+                                path="/"
+                                render={() => (
+                                    <Profile
+                                        bio={this.state.bio}
+                                        first={this.state.first}
+                                        last={this.state.last}
+                                        profilePicUrl={this.state.profilePicUrl}
+                                        onUpdateBio={this.onUpdateBio}
+                                    />
+                                )}
+                            />
+                            <Route path="/user/:id" component={OtherProfile} />
+                            <Route
+                                path="/friends"
+                                render={() => <ConnectedFriends />}
+                            />
+                            <Route
+                                path="/online"
+                                render={() => <ConnectedOnlineUsers />}
+                            />
+                            <Redirect path="*" to="/" />
+                        </Switch>
                     </div>
                 </BrowserRouter>
             </div>

@@ -1,6 +1,6 @@
 import React from "react";
-import axios from "./axios";
-import ReactDOM from "react-dom";
+// import axios from "./axios";
+// import ReactDOM from "react-dom";
 import { Register } from "./register";
 import { Login } from "./login";
 import { HashRouter, Route, Link } from "react-router-dom";
@@ -13,8 +13,9 @@ export function Welcome() {
             <HashRouter>
                 <div>
                     <Route path="/register" component={Register} />
-                    <Route path="/login" component={Login} />
                     <Link to="/register"> Registration </Link>
+
+                    <Route path="/login" component={Login} />
                     <Link to="/login"> Login </Link>
                 </div>
             </HashRouter>

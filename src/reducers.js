@@ -30,6 +30,37 @@ export function reducer(state = {}, action) {
         };
     }
 
+    if (action.type == "ONLINE_USERS") {
+        console.log("action.onlineUsersList", action.onlineUsersList);
+        state = {
+            ...state,
+            onlineUsers: action.onlineUsersList
+        };
+        console.log("state from reducer: ", state);
+        return state;
+    }
+
+    if (action.type == "USER_WHO_JOINED") {
+        state = {
+            ...state,
+            onlineUsers: state.onlineUsers.concat(action.joined)
+        };
+        return state;
+    }
+
+    if (action.type == "USER_WHO_LEFT") {
+        state = {
+            ...state,
+            onlineUsers: state.onlineUsers.filter(i => {
+                if (i.leftUser == action.leftUser) {
+                    return false;
+                } else {
+                    return true;
+                }
+            })
+        };
+    }
+
     console.log("reducer state: ", state);
     return state;
 }

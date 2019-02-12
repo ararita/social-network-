@@ -17,6 +17,9 @@ export default function Header(props) {
                         profilePicUrl={props.profilePicUrl}
                         updateProfileUrl={props.updateProfileUrl}
                     />
+                    <a href="/logout" id="logoutLink">
+                        <p>Logout</p>
+                    </a>
                 </div>
             </div>
         </div>
