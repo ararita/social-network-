@@ -10,6 +10,8 @@ const uidSafe = require("uid-safe");
 const path = require("path");
 const app = express();
 const config = require("./config");
+const server = require("http").Server(app);
+const io = require("socket.io")(server, { origins: "localhost:8080" });
 
 const diskStorage = multer.diskStorage({
     destination: function(req, file, callback) {
@@ -34,12 +36,15 @@ const s3 = require("./s3");
 app.use(compression());
 
 app.use(bodyParser.json());
-app.use(
-    cookieSession({
-        secret: `I'm always angry.`,
-        maxAge: 1000 * 60 * 60 * 24 * 14
-    })
-);
+const cookieSessionMiddleware = cookieSession({
+    secret: `I'm always angry.`,
+    maxAge: 1000 * 60 * 60 * 24 * 90
+});
+
+app.use(cookieSessionMiddleware);
+io.use(function(socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
 
 app.use(express.static(__dirname + "/public"));
 
@@ -199,10 +204,10 @@ app.post("/initial-friendship-status/:id/accept-friend-request", (req, res) => {
 });
 
 app.get("/friends/list", (req, res) => {
-    db.getFriendshipLists(req.session.userId)
-        .then(dbInfo => {
-            console.log("dbInfo", dbInfo);
-            res.json(dbInfo);
+    db.getFriendsAndWannabes(req.session.userId)
+        .then(dbResult => {
+            console.log("dbResult from getFriendsAndWannabes", dbResult);
+            res.json(dbResult);
         })
         .catch(err => {
             console.log("error while getting friendshiplists: ", err);
@@ -223,6 +228,71 @@ app.get("*", function(req, res) {
     }
 });
 
-app.listen(8080, function() {
+server.listen(8080, function() {
     console.log("I'm listening.");
+});
+
+/////socket.io stuff
+
+let onlineUsers = {};
+
+io.on("connection", function(socket) {
+    if (!socket.request.session || !socket.request.session.userId) {
+        return socket.disconnect(true);
+    }
+    //this callback function will run whenever user logs in or registers;
+    // socket is an object that represents the socket connection that just happened
+
+    console.log("socket.request.session: ", socket.request.session);
+
+    const socketId = socket.id;
+    const userId = socket.request.session.userId;
+    // every socket has its on unique id, every time different
+    onlineUsers[socket.id] = userId;
+
+    console.log("onlineUsers: ", onlineUsers);
+    console.log("onlineUsers[socket.id]: ", onlineUsers[socket.id]);
+
+    let userIds = Object.values(onlineUsers);
+    console.log("userIds", userIds);
+
+    //-------------socket events:-------------------
+    //online users
+    db.getUsersByIds(userIds)
+        .then(data => {
+            console.log("Data get usersByID: ", data.rows);
+            socket.emit(
+                "onlineUsers",
+                data.rows.filter(i => {
+                    if (i.id == userId) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                })
+            );
+        })
+        .catch(err => {
+            console.log(err.message);
+        });
+
+    //USER JOINS
+    const filteredOwnUserIds = userIds.filter(id => id == userId);
+    if (filteredOwnUserIds.length == 1) {
+        db.getJoinedUser(userId)
+            .then(dbResults => {
+                socket.broadcast.emit("userJoined", dbResults.rows[0]);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    // USER LEAVES
+    socket.on("disconnect", function() {
+        delete onlineUsers[socketId];
+        if (Object.values(onlineUsers).indexOf(userId) == -1) {
+            io.sockets.emit("userLeft", userId);
+        }
+    });
 });
