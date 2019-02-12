@@ -25,7 +25,6 @@ module.exports.getUserByEmail = function(email) {
     );
 };
 
-//
 module.exports.getUserProfile = function(userId) {
     return db.query(
         `SELECT *
@@ -117,7 +116,8 @@ OR (recipient_id = $2 AND sender_id = $1)
     );
 };
 
-module.exports.getFriendshipLists = function(id) {
+//get list of friends and wanna be friends
+module.exports.getFriendsAndWannabes = function(id) {
     return db.query(
         `SELECT users.id, first, last, url, accepted
         FROM friendships
@@ -127,4 +127,19 @@ module.exports.getFriendshipLists = function(id) {
         OR (accepted = true AND sender_id = $1 AND recipient_id = users.id)`,
         [id]
     );
+};
+
+//get online users
+module.exports.getUsersByIds = function(arrayOfIds) {
+    return db.query(
+        ` SELECT id, first, last, url FROM users WHERE id = ANY ($1)`,
+        [arrayOfIds]
+    );
+};
+
+//get users who joined:
+module.exports.getJoinedUser = function(userId) {
+    return db.query(`SELECT id,first,last,url FROM users WHERE id = $1`, [
+        userId
+    ]);
 };
