@@ -143,3 +143,24 @@ module.exports.getJoinedUser = function(userId) {
         userId
     ]);
 };
+
+//get chat messages
+module.exports.getChatMessages = function() {
+    return db.query(
+        `SELECT users.id AS sender_id, users.first AS sender_first, users.last AS sender_last, users.url AS sender_url, message, chatmessages.id AS message_id, chatmessages.created_at AS message_created_at
+        FROM chatmessages
+        LEFT JOIN users
+        ON chatmessages.user_id = users.id
+        ORDER BY chatmessages.created_at DESC
+        LIMIT 10`
+    );
+};
+
+module.exports.addChatMessage = function(message, userId) {
+    return db.query(
+        `INSERT INTO chatmessages (message, user_id)
+        VALUES ($1, $2)
+        RETURNING *`,
+        [message, userId]
+    );
+};
