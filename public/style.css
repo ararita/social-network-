@@ -1,10 +1,13 @@
-/* .modal {
-    background: red;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 10;
-} */
+body {
+    font-family: Helvetica;
+    background-color: white;
+    box-sizing: border-box;
+    margin: 5px;
+    background-color: #323335;
+}
+main {
+    margin: 0 auto;
+}
 
 .modal {
     width: 80%;
@@ -19,6 +22,14 @@
     background: linear-gradient(#323335, #848485);
 }
 
+/* welcome component */
+
+.welcome-container {
+}
+
+.profile-container {
+}
+
 /* #profilepic img {
     width: 250px;
     height: 250px;
@@ -26,10 +37,6 @@
 .logo {
     width: 200px;
     height: 200px;
-}
-
-main {
-    margin: 0 auto;
 }
 
 .profile-pic-small {
@@ -47,25 +54,18 @@ main {
     /* transform: translate(-05%, -27%); */
 }
 
-body {
-    font-family: Helvetica;
-    background-color: white;
-    box-sizing: border-box;
-    margin: 5px;
-}
-
-/* button {
+button {
     width: 100px;
     height: 30px;
     padding: 0;
     right: 3%;
     border-radius: 5px;
-} */
+}
 
-button.friend-button {
+/* button.friend-button {
     width: 200px;
     height: 30px;
-}
+} */
 
 .header-container {
     display: flex;
