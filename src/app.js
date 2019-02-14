@@ -9,6 +9,7 @@ import Header from "./header";
 import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
 import { ConnectedFriends } from "./friends";
 import { ConnectedOnlineUsers } from "./onlineusers";
+import { ConnectedChatMessages } from "./chatmessages";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -115,6 +116,10 @@ export default class App extends React.Component {
                             <Route
                                 path="/online"
                                 render={() => <ConnectedOnlineUsers />}
+                            />
+                            <Route
+                                path="/chat"
+                                render={() => <ConnectedChatMessages />}
                             />
                             <Redirect path="*" to="/" />
                         </Switch>

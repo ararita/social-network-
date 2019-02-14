@@ -5,7 +5,7 @@ import { BioEditor } from "./bioeditor";
 export function Profile(props) {
     console.log("properties: ", props);
     return (
-        <div>
+        <div className="profile-container">
             <div>
                 <ProfilePic
                     className="profile-pic-big"
@@ -19,6 +19,8 @@ export function Profile(props) {
                 <h2>
                     {props.first} {props.last}
                 </h2>
+            </div>
+            <div className="bioeditor-box">
                 <BioEditor text={props.bio} onUpdateBio={props.onUpdateBio} />
             </div>
         </div>

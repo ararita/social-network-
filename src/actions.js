@@ -66,3 +66,32 @@ export function userWhoLeft(leftUser) {
         leftUser: leftUser
     };
 }
+
+//chat stuff:
+
+export function getChatMessages(messages) {
+    return {
+        type: "GET_CHAT_MESSAGES",
+        messages: messages
+    };
+}
+
+export function loadChatMessage(newMessage) {
+    return {
+        type: "LOAD_CHAT_MESSAGE",
+        newMessage: newMessage
+    };
+}
+
+// export function receiveChatMessages(messages) {
+//     return {
+//         type: "LOAD_CHAT_MESSAGES",
+//         messages: messages
+//     };
+// }
+//
+// export function addChatMessage(newMessage) {
+//     return {
+//         type: "ADD_CHAT_MESSAGE",
+//         newMessage: newMessage
+//     };

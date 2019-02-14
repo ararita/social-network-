@@ -61,6 +61,22 @@ export function reducer(state = {}, action) {
         };
     }
 
+    if (action.type == "GET_CHAT_MESSAGES") {
+        state = {
+            ...state,
+            chatMessages: action.messages
+        };
+        return state;
+    }
+
+    if (action.type == "LOAD_CHAT_MESSAGE") {
+        state = {
+            ...state,
+            chatMessages: state.chatMessages.concat(action.newMessage)
+        };
+        return state;
+    }
+
     console.log("reducer state: ", state);
     return state;
 }

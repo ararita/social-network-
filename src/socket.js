@@ -2,7 +2,13 @@
 //receives messages from backend
 
 import * as io from "socket.io-client";
-import { allOnlineUsers, userWhoJoined, userWhoLeft } from "./actions";
+import {
+    allOnlineUsers,
+    userWhoJoined,
+    userWhoLeft,
+    getChatMessages,
+    loadChatMessage
+} from "./actions";
 
 let socket;
 
@@ -17,12 +23,20 @@ export function initSocket(store) {
             store.dispatch(allOnlineUsers(message));
         });
 
-        socket.on("userJoinded", function(message) {
+        socket.on("userJoined", function(message) {
             store.dispatch(userWhoJoined(message));
         });
 
         socket.on("userLeft", function(message) {
             store.dispatch(userWhoLeft(message));
         });
+        socket.on("chatMessages", function(messages) {
+            store.dispatch(getChatMessages(messages));
+        });
+
+        socket.on("loadChatMessages", function(newMessage) {
+            store.dispatch(loadChatMessage(newMessage));
+        });
     }
+    return socket;
 }
