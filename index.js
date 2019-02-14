@@ -299,29 +299,33 @@ io.on("connection", function(socket) {
     //to load chat messages:
     db.getChatMessages()
         .then(results => {
+            console.log(
+                "this are results.rows from getChatMessages",
+                results.rows
+            );
             socket.emit("chatMessages", results.rows);
         })
         .catch(err => {
             console.log("chatMessages aren't loading: ", err);
         });
 
-    // socket.on("chatMessageFromUserInput", async text => {
-    //     const userInfo = await db.getUserAppInfo(userId);
-    //     let newMessage = {
-    //         message: text,
-    //         sender_first: userInfo.rows[0].first,
-    //         sender_last: userInfo.rows[0].last,
-    //         sender_id: userInfo.rows[0].id,
-    //         sender_url: userInfo.rows[0].url
-    //     };
-    //     db.addChatMessage(newMessage.message, newMessage.sender_id)
-    //         .then(dbInfo => {
-    //             newMessage.message_id = dbInfo.rows[0].id;
-    //             newMessage.message_created_at = dbInfo.rows[0].created_at;
-    //             io.sockets.emit("chatMessageFromServer", newMessage);
-    //         })
-    //         .catch(err => {
-    //             console.log("error while adding new chatmessage: ", err);
-    //         });
-    // });
+    socket.on("chatMessageFromUserInput", async text => {
+        const userInfo = await db.getUserProfile(userId);
+        let newMessage = {
+            message: text,
+            sender_first: userInfo.rows[0].first,
+            sender_last: userInfo.rows[0].last,
+            sender_id: userInfo.rows[0].id,
+            sender_url: userInfo.rows[0].url
+        };
+        db.addChatMessage(newMessage.message, newMessage.sender_id)
+            .then(dbInfo => {
+                newMessage.message_id = dbInfo.rows[0].id;
+                newMessage.message_created_at = dbInfo.rows[0].created_at;
+                io.sockets.emit("loadChatMessages", newMessage);
+            })
+            .catch(err => {
+                console.log("error while loading new chatmessage: ", err);
+            });
+    });
 });
