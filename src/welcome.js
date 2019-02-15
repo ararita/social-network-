@@ -1,22 +1,24 @@
 import React from "react";
+import Logo from "./logo";
+
 // import axios from "./axios";
 // import ReactDOM from "react-dom";
 import { Register } from "./register";
 import { Login } from "./login";
-import { HashRouter, Route, Link } from "react-router-dom";
+
+import { HashRouter, Route } from "react-router-dom";
 
 export function Welcome() {
     return (
         <div className="welcome-container">
-            <h1>Welcome to house of good news!</h1>
+            <img src="title.png" className="title" />
 
             <HashRouter>
                 <div className="login-register-container">
-                    <Route path="/register" component={Register} />
-                    <Link to="/register"> Registration </Link>
-
+                    <Logo className="logo-large" />
+                    <p>Please come in:</p>
+                    <Route exact path="/" component={Register} />
                     <Route path="/login" component={Login} />
-                    <Link to="/login"> Login </Link>
                 </div>
             </HashRouter>
         </div>

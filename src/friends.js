@@ -16,12 +16,14 @@ export class Friends extends React.Component {
     }
     render() {
         return (
-            <div>
-                <div className="wannabes-box">
+            <div className="friends-wrapper">
+                <div className="friends-box">
+                    <h2>Pending friend requests:</h2>
+
                     {this.props.wannabes &&
                         this.props.wannabes.map(i => {
                             return (
-                                <div key={i.id}>
+                                <div className="friend-info" key={i.id}>
                                     {
                                         <Link to={`/user/${i.id}`} key={i.id}>
                                             {i.first} {i.last}
@@ -41,15 +43,18 @@ export class Friends extends React.Component {
                         })}
                 </div>
                 <div className="friends-box">
+                    <h2>List of friends:</h2>
+
                     {this.props.friends &&
                         this.props.friends.map(i => {
                             return (
-                                <div key={i.id}>
+                                <div className="friend-info" key={i.id}>
                                     {
                                         <Link to={`/user/${i.id}`} key={i.id}>
                                             {i.first} {i.last}
                                         </Link>
                                     }
+
                                     <button
                                         onClick={() =>
                                             this.props.dispatch(unFriend(i.id))

@@ -1,5 +1,5 @@
 import React from "react";
-// import Logo from "./logo";
+import Logo from "./logo";
 import axios from "./axios";
 import ProfilePic from "./profilepic";
 import Uploader from "./uploader";

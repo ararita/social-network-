@@ -1,0 +1,360 @@
+DEPENDENCIES:
+
+babel: software, compiles js code, transform it, take the code we write and transform it to jscript that will work on all browsers;
+
+"babel-preset-react"-transforming react, cause react invent new syntax, its not jscript and its being used in js, it needs to be transformed;
+
+
+webpack: bundler, task runner; tool for building stuff;
+
+
+redux/;
+
+
+socket.io: enables a realtime communication between clients and server
+
+
+index.js ------->
+
+app.get('*', function(req, res) {
+    res.sendFile(__dirname + '/index.html');
+});
+
+ova zvjezdica znaci da ce sve sto user pokusa, npr drugu route, uvijek ce ga redirect to index.html (ili ako url postoji, onda ce naravno ic u taj url)
+
+to mora biti zadnje prije app.listen
+
+
+
+start.js ------>
+
+import React from "react";
+import ReactDOM from "react-dom";
+
+ReactDOM.render(
+    <HelloWorld />,
+    document.querySelector("main")
+    //ovaj main je main iz htmla, to je root
+);
+
+function HelloWorld() {
+    //component
+    return (
+        <div>Hello, World!</div> //this is jsx; components in jsx start with capital letter;
+        //this is the expression that produces jscript object
+    );
+}
+//component can be created in two ways: with function or with class;
+//use class if we need class, otherwise use function;
+//but if wanted, calss can always be used;
+//like in vue, we need div wrapper; only one element
+//ne mozemo koristiti class, vec moramo npr className
+//components can be nested, userNem wa srendered in Hello, and HelloWorld
+
+//props: mozemo ih gledat kao arguments koje onda pass to a function
+
+jsx-javascript xtml; xtml je stroziji od htmla, more uvijek imati zatvoreni tag npr input: <input></input>, sto u html nije potrebno. skracenica: <input />
+
+
+
+2 componenst: welcome and registration
+WELCOME CAN be fn; and its rendering registration component;
+registration has to have input fileds; login link
+
+reg has to be a class; has to be a state; setstate, to chanhge the state of the compnent, thats how you change the state on the screen;
+this.state.error =truw; tako za error
+
+make sure url is welcome if they logged out:
+app.get('/welocme', function(req, res) {
+if (req.session.userId) {
+res.redirect("/")
+} else {
+res.sendFile(__dirname + '/index.html')
+}
+}
+})
+
+
+app.get ("*")....
+
+if (!req.session.userId) {
+else {
+res.sendFile(__dirname + '/index.html')
+
+}
+}
+
+
+welcome: can just be a function, woth div or else;
+
+registration: needs state;
+
+constructor(props) {
+super(props);
+this.state = {
+
+};
+}
+
+## Middleware
+1. body parser (json)
+
+2. express.static
+
+3. cookie session
+
+## Postgres
+
+1. `createdb social`
+
+2. `CREATE TABLE users`
+
+## Node Modules
+
+1. bcrypt.js with promisified `compare` and `hash`,
+
+2. db.js that calls `spicedPg` with new db url
+
+## Server Routes
+
+1. /welcome, *
+    * must be last
+
+2. POST /register
+    * responds with JSON indication of success or failure
+
+## start.js
+
+1. Test url to determine if user is logged in and render appropriate content based on that determination
+
+## Components
+
+1. `Welcome`
+
+2. `Registration`
+
+
+
+
+----------------csurf-----------------
+
+app.use(csurf());
+
+app.use(function(req, res, next){
+    res.cookie('mytoken', req.csrfToken());
+    next();
+});
+
+
+
+
+
+----------part2----------------
+
+login component:
+
+
+
+----------part3---------------
+
+app ce bit parent component, i sve dalje ce biti rendered unutar tog parenta as children;
+
+
+building app component:
+
+start.js----
+if (location.pathname == "/welcome") {
+    renderStuff = <Welcome />;
+} else {
+    renderStuff = <Logo />;
+} ---------------> tu ce umjesto logo doc app component
+
+
+boiler plate za svaki component:
+import React from "react";
+
+export default class App extends React.Component {
+    constructor() {
+        super();
+        this.state = {};
+
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>app running</h1>
+            </div>
+        );
+    }
+}
+
+
+
+every next component will be built in app component
+
+
+
+1.get info about the logged in user:
+that info lives in the data base; for that we need to talk to server, to get that data; axios does that; ---> import axios on the top of app; -done
+
+-------------------------
+componentDidMount:
+axios.get("/user");
+
+we will store data about user once we got them from the server in the state object of the component; so in the state of app;
+
+we do that with function setState:
+this.setState()
+
+
+other components need access to that data, we have it stored now in the app component but we need another component that will render those info
+
+pass data from the state of one component:
+
+import React from "react";
+import { Logo } from "./logo";
+import axios from "./axios";
+import ProfilePic from "./profilepic";
+
+export default class App extends React.Component {
+    constructor() {
+        super();
+        this.state = {};
+    }
+
+    //this is equivalent of vue mounted
+    //a lifecycle method
+    componentDidMount() {
+        // axios.get("/user");
+        this.setState({
+            //this is an object
+            first: "vesna", //do this to be dynamic, not hardcoded
+            last: "munjiza"
+        });
+    }
+    render() {
+        return (
+            <div>
+                <Logo />
+                <ProfilePic first={this.state.first} />
+                // dakle ono sto imamo u setState-u, first u ovom slucaju
+                <h1>Welcome, {this.state.first}</h1>
+            </div>
+        );
+    }
+}
+
+
+sada moramo u profilepic.js,
+
+import React from "react";
+
+export default function ProfilePic(props) {
+    console.log("props: ", props);
+    //props is an object that passes all the data from profilepic in the app
+
+    return (
+        <div>
+            <h1>Welcome from profile pic, {props.first}</h1>
+        </div>
+    );
+}
+
+
+-------image upload----------
+
+uploader.js
+
+when user clicks on the user profile icon, modal shall show up:
+
+import React from "react";
+
+export default class Uploader extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            uploaderIsVisible: false
+
+            ////////if uploader is false, should not be on screen, if true, should be on screen;
+        };
+    }
+    render() {
+        return (
+            <div>
+                <h1>uploader</h1>
+            </div>
+        );
+    }
+}
+
+
+when user clicks on their profilepicture we need to run a function that will set uploaderIsVisible to true in the state of App;
+
+this function will use setState method, to change the state of uploaderIsVisible from false to true;
+
+
+ProfilePic is a child of App, and children can't change the state of parents in react, we have to allow them: in App, write function that will change uploaderIsVisible from false to true, and when we have that fn pass it as a prop to profile pic; ------sve to zato jer ce user kliknuti u profilepic.js da promjeni sliku, ali setState se mora promijeniti u App-u;
+function will be triggered onClick in the ProfilePic component;
+
+drugim rijecima, define a function in the App, and run it or call it in the ProfilePic;
+
+
+
+
+--------------------------------------------------------------------------
+to do:
+
+1. get info about the logged in user
+   - in componentDidMount of App, make axios request to server to get data about the logged in user
+   - put this data in state of App
+
+2. pass data about user to ProfilePic, so ProfilePic can render it
+   - first, last, profilePicUrl
+
+3. Uploader component should open as a modal when user clicks on their profile picture
+   - so uploaderIsVisible property in the state of App determines when Uploader should be visible. If uploaderIsVisible is true, then render Uploader. If uploaderIsVisible is false, then don't render the Uploader component
+   - when the user clicks on their profile picture, we need to run a function that will set uploaderIsVisible to true in the state of App
+     - this function will use the setState method to change uploaderIsVisible from false to true
+     - this function must be defined in App and then passed to ProfilePic as a prop. The function will be triggered onClick in the ProfilePic component.
+   - once the modal shows up on click, give yourself a nice break and a treat cuz you earned it! :D
+   - back to work.... from here on out you can reference your Vue project and the upload function you wrote there
+   - capture file user uploaded, append to Form Data, send it to the server using axios
+   - server-side: copy-paste all the boilerplate from the Vue project (like multer, path, uidSafe, s3, post axios route, etc.)
+     - use the same credentials you used in Vue
+   - once you can upload to uploads directory and to Amazon, then you'll need to put the new image in the database (UPDATE query)
+     - store full url (s3Url + filename ) in db
+   - send response back to front-end (React), and as part of response send back the full url you stored in the db
+     - res.json() -- res.json is how we send responses from server to front-end
+   - we're back in React land! Specifically, we're now back in the Uploader component
+     - at this point new image should be in amazon, db, uploads, and when you refresh the page the new image should show up
+   - take full url (the once we stored in the db) and put it in the state of the App component
+     - complication: Uploader has received the full url from the server. But App is actually the one that needs it
+       - Solution: we write the function in App that will store the new profile pic url in state of App, but then pass it to the Uploader component as a prop
+       - we then invoke the function as a prop in Uploader
+       - (this is the same exact thing we did with the function that toggles the Uploader component)
+       - You know you've completed this step when the user can upload a new profile pic and that new profile pic shows up instantly
+
+
+
+
+
+       ----------------part 6--------------------------------
+
+
+       button is its own conponent, that will be rendered in OtherProfile component
+
+
+
+       we have to take the id from the url, and pass it to otherprofile
+
+
+
+
+       ----------------part7:
+
+       new route index.js
+       /friends
+
+
+       3 actions?

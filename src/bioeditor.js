@@ -39,9 +39,9 @@ export class BioEditor extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="bioeditor-wrapper">
                 {this.state.isEditorVisible && (
-                    <div>
+                    <div className="bio">
                         <textarea
                             onChange={this.handleBioChange}
                             value={this.state.bio}
@@ -50,13 +50,15 @@ export class BioEditor extends React.Component {
                     </div>
                 )}
                 {this.state.bio && !this.state.isEditorVisible && (
-                    <span>
-                        {this.state.bio}
+                    <div className="bio">
+                        <p>{this.state.bio}</p>
                         <button onClick={this.showEditor}>update</button>
-                    </span>
+                    </div>
                 )}
                 {!this.state.bio && !this.state.isEditorVisible && (
-                    <button onClick={this.showEditor}>Add your bio</button>
+                    <div className="bio">
+                        <button onClick={this.showEditor}>Add your bio</button>
+                    </div>
                 )}
             </div>
         );

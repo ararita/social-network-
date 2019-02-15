@@ -17,6 +17,7 @@ const store = createStore(
 let renderStuff;
 
 if (location.pathname == "/welcome") {
+    console.log("welcome works");
     renderStuff = <Welcome />;
 } else {
     initSocket(store);
