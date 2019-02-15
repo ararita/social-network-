@@ -303,7 +303,7 @@ io.on("connection", function(socket) {
                 "this are results.rows from getChatMessages",
                 results.rows
             );
-            socket.emit("chatMessages", results.rows);
+            socket.emit("chatMessages", results.rows.reverse());
         })
         .catch(err => {
             console.log("chatMessages aren't loading: ", err);
