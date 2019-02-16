@@ -92,6 +92,7 @@ export function getWallMessages(posts) {
 }
 
 export function addWallMessage(post) {
+    console.log("add post to the wall: ", post);
     return {
         type: "ADD_WALL_POST",
         post: post
