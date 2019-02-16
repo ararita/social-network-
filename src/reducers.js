@@ -77,6 +77,22 @@ export function reducer(state = {}, action) {
         return state;
     }
 
+    if (action.type == "GET_WALL_POSTS") {
+        state = {
+            ...state,
+            posts: action.posts
+        };
+        return state;
+    }
+
+    if (action.type == "ADD_WALL_POST") {
+        state = {
+            ...state,
+            posts: state.posts.concat(action.post)
+        };
+        return state;
+    }
+
     console.log("reducer state: ", state);
     return state;
 }
