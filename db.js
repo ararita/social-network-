@@ -165,10 +165,37 @@ module.exports.addChatMessage = function(message, userId) {
     );
 };
 
+//wall feature
 module.exports.getWallPosts = function() {
     return db.query(
-        `SELECT * FROM wall, 
+        `SELECT * FROM wall,
         ORDER BY id DESC,
         LIMIT 10`
     );
 };
+
+module.exports.addWallPosts = function(
+    senderId,
+    first,
+    last,
+    url,
+    message,
+    picture
+) {
+    return db.query(
+        `INSERT INTO wall (sender_id, first, last, url, messages, picture)
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING *`,
+        [senderId, first, last, url, message, picture]
+    );
+};
+
+// ADD WALL MESSAGE LINK
+// module.exports.addWallPostsLink = (senderId, firstName, lastName, profilePic, message, link, description, publisher, picture) => {
+//     return db.query(`
+//         INSERT INTO wall (sender_id, first_name, last_name, profil_pic, messages, link, descriptions, publisher, picture)
+//         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+//         RETURNING *`,
+//         [senderId, firstName, lastName, profilePic, message, link, description, publisher,  picture ]
+//     )
+// }
