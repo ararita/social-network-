@@ -83,15 +83,17 @@ export function loadChatMessage(newMessage) {
     };
 }
 
-// export function receiveChatMessages(messages) {
-//     return {
-//         type: "LOAD_CHAT_MESSAGES",
-//         messages: messages
-//     };
-// }
-//
-// export function addChatMessage(newMessage) {
-//     return {
-//         type: "ADD_CHAT_MESSAGE",
-//         newMessage: newMessage
-//     };
+//Wall posts:
+export function getWallMessages(posts) {
+    return {
+        type: "GET_WALL_POSTS",
+        posts: posts
+    };
+}
+
+export function addWallMessage(post) {
+    return {
+        type: "ADD_WALL_POST",
+        post: post
+    };
+}
