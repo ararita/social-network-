@@ -7,7 +7,9 @@ import {
     userWhoJoined,
     userWhoLeft,
     getChatMessages,
-    loadChatMessage
+    loadChatMessage,
+    getWallMessages,
+    addWallMessage
 } from "./actions";
 
 let socket;
@@ -15,7 +17,7 @@ let socket;
 export function initSocket(store) {
     if (!socket) {
         //our code will go here inside of if block
-        //also all messages from the back-index.js are received WHERE
+        //also all messages from the back-index.js are received here
         //we are listening here from the message that is sent from server: socket.on()
         socket = io.connect();
         socket.on("onlineUsers", function(message) {
@@ -36,6 +38,13 @@ export function initSocket(store) {
 
         socket.on("loadChatMessages", function(newMessage) {
             store.dispatch(loadChatMessage(newMessage));
+        });
+        socket.on("wall messages", function(posts) {
+            store.dispatch(getWallMessages(posts));
+        });
+
+        socket.on("new link post", function(post) {
+            store.dispatch(addWallMessage(post));
         });
     }
     return socket;
