@@ -10,6 +10,7 @@ import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
 import { ConnectedFriends } from "./friends";
 import { ConnectedOnlineUsers } from "./onlineusers";
 import { ConnectedChatMessages } from "./chatmessages";
+import Wall from "./wall";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -99,13 +100,24 @@ export default class App extends React.Component {
                                 exact
                                 path="/"
                                 render={() => (
-                                    <Profile
-                                        bio={this.state.bio}
-                                        first={this.state.first}
-                                        last={this.state.last}
-                                        profilePicUrl={this.state.profilePicUrl}
-                                        onUpdateBio={this.onUpdateBio}
-                                    />
+                                    <div>
+                                        <Profile
+                                            bio={this.state.bio}
+                                            first={this.state.first}
+                                            last={this.state.last}
+                                            profilePicUrl={
+                                                this.state.profilePicUrl
+                                            }
+                                            onUpdateBio={this.onUpdateBio}
+                                        />
+                                        <Wall
+                                            first={this.state.first}
+                                            last={this.state.last}
+                                            profilePicUrl={
+                                                this.state.profilePicUrl
+                                            }
+                                        />
+                                    </div>
                                 )}
                             />
                             <Route path="/user/:id" component={OtherProfile} />
