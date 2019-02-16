@@ -296,7 +296,7 @@ io.on("connection", function(socket) {
         }
     });
 
-    //to load chat messages:
+    //chat messages:
     db.getChatMessages()
         .then(results => {
             console.log(
@@ -328,4 +328,12 @@ io.on("connection", function(socket) {
                 console.log("error while loading new chatmessage: ", err);
             });
     });
+
+    db.getWallPosts()
+        .then(data => {
+            socket.emit("wall messages", {
+                posts: data.rows
+            });
+        })
+        .catch(err => console.log(err.message));
 });
