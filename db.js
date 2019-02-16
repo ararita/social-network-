@@ -164,3 +164,11 @@ module.exports.addChatMessage = function(message, userId) {
         [message, userId]
     );
 };
+
+module.exports.getWallPosts = function() {
+    return db.query(
+        `SELECT * FROM wall, 
+        ORDER BY id DESC,
+        LIMIT 10`
+    );
+};
