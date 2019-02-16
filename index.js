@@ -329,11 +329,47 @@ io.on("connection", function(socket) {
             });
     });
 
+    //wall posts
     db.getWallPosts()
-        .then(data => {
-            socket.emit("wall messages", {
-                posts: data.rows
-            });
+        .then(dbResults => {
+            console.log("results from getWallPosts: ", dbResults.rows);
+            socket.emit("wall messages", dbResults.rows);
         })
-        .catch(err => console.log(err.message));
+        .catch(err => {
+            console.log(err);
+        });
+
+    // socket.on("new link", link => {
+    //     request.get(link.url, (err, res, body) => {
+    //         if (err) {
+    //             console.log(err);
+    //         } else if (res.statusCode === 200) {
+    //             const $ = cheerio.load(body);
+    //             const title = $('meta[property="og:title"]').attr("content");
+    //             const picture = $('meta[property="og:image"]').attr("content");
+    //             const publisher = $('meta[property="og:site_name"]').attr(
+    //                 "content"
+    //             );
+    //             const description = $('meta[property="og:description"]').attr(
+    //                 "content"
+    //             );
+    //             addWallPostsLink(
+    //                 socket.request.session.userID,
+    //                 link.first,
+    //                 link.last,
+    //                 link.picture,
+    //                 title,
+    //                 link.url,
+    //                 description,
+    //                 publisher,
+    //                 picture
+    //             )
+    //                 .then(data => {
+    //                     console.log(data.rows[0]);
+    //                     io.emit("new link post", { data: data.rows[0] });
+    //                 })
+    //                 .catch(err => console.log(err.message));
+    //         }
+    //     });
+    // });
 });
