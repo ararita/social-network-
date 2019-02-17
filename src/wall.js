@@ -8,18 +8,23 @@ import ProfilePic from "./profilepic";
 class Wall extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        // this.state = { isPostVisible: true };
+        // this.uploadPost = this.uploadPost.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
+        // this.submit = this.submit.bind(this);
     }
 
-    render() {
-        const { posts } = this.props;
+    handleChange(e) {
+        this.wallInput = e.target.value;
+    }
 
-        if (!posts) {
-            return null;
-        }
+    submit() {}
+
+    render() {
         return (
             <div className="wall-container">
-                <h1>this is the wall</h1>
+                <textarea />
+                <button>post</button>
             </div>
         );
     }
