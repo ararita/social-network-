@@ -191,11 +191,32 @@ module.exports.addWallPosts = function(
 };
 
 // ADD WALL MESSAGE LINK
-// module.exports.addWallPostsLink = (senderId, firstName, lastName, profilePic, message, link, description, publisher, picture) => {
-//     return db.query(`
-//         INSERT INTO wall (sender_id, first_name, last_name, profil_pic, messages, link, descriptions, publisher, picture)
-//         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-//         RETURNING *`,
-//         [senderId, firstName, lastName, profilePic, message, link, description, publisher,  picture ]
-//     )
-// }
+module.exports.addWallPostsLink = (
+    senderId,
+    firs,
+    last,
+    url,
+    message,
+    link,
+    description,
+    publisher,
+    picture
+) => {
+    return db.query(
+        `
+        INSERT INTO wall (sender_id, first, last, url, messages, link, descriptions, publisher, picture)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+        RETURNING *`,
+        [
+            senderId,
+            firs,
+            last,
+            url,
+            message,
+            link,
+            description,
+            publisher,
+            picture
+        ]
+    );
+};

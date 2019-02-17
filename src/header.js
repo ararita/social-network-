@@ -14,6 +14,9 @@ export default function Header(props) {
                 updateProfileUrl={props.updateProfileUrl}
             />
             <nav>
+                <a href="/home" className="links">
+                    HOME
+                </a>
                 <a href="/friends" className="links">
                     FRIENDS
                 </a>

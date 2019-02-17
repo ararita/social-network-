@@ -8,23 +8,32 @@ import ProfilePic from "./profilepic";
 class Wall extends React.Component {
     constructor(props) {
         super(props);
-        // this.state = { isPostVisible: true };
+        this.state = { isPostVisible: true };
         // this.uploadPost = this.uploadPost.bind(this);
-        // this.handleChange = this.handleChange.bind(this);
-        // this.submit = this.submit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     handleChange(e) {
         this.wallInput = e.target.value;
     }
 
-    submit() {}
+    submit() {
+        initSocket().emit("new post from user", {
+            messages: this.wallInput,
+            first: this.props.first,
+            last: this.props.last
+        });
+        console.log(this.wallInput);
+    }
 
     render() {
         return (
             <div className="wall-container">
-                <textarea />
-                <button>post</button>
+                <textarea onChange={this.handleChange} name="wallInput" />
+                <button onClick={this.submit} className="btn__wall">
+                    POST
+                </button>{" "}
             </div>
         );
     }

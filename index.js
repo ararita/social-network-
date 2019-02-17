@@ -339,6 +339,8 @@ io.on("connection", function(socket) {
             console.log(err);
         });
 
+    // socket.on("new post from user");
+
     // socket.on("new link", link => {
     //     request.get(link.url, (err, res, body) => {
     //         if (err) {

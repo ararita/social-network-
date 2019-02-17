@@ -11,6 +11,7 @@ import { ConnectedFriends } from "./friends";
 import { ConnectedOnlineUsers } from "./onlineusers";
 import { ConnectedChatMessages } from "./chatmessages";
 import Wall from "./wall";
+import FriendNotifications from "./friendNotifications";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -88,6 +89,8 @@ export default class App extends React.Component {
                     first={this.state.first}
                     last={this.state.last}
                 />
+                <FriendNotifications />
+
                 <BrowserRouter>
                     <div>
                         {this.state.uploaderIsVisible && (
@@ -110,14 +113,17 @@ export default class App extends React.Component {
                                             }
                                             onUpdateBio={this.onUpdateBio}
                                         />
-                                        <Wall
-                                            first={this.state.first}
-                                            last={this.state.last}
-                                            profilePicUrl={
-                                                this.state.profilePicUrl
-                                            }
-                                        />
                                     </div>
+                                )}
+                            />
+                            <Route
+                                path="/home"
+                                render={() => (
+                                    <Wall
+                                        first={this.state.first}
+                                        last={this.state.last}
+                                        profilePicUrl={this.state.profilePicUrl}
+                                    />
                                 )}
                             />
                             <Route path="/user/:id" component={OtherProfile} />
