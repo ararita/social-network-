@@ -250,6 +250,7 @@ button {
     justify-content: space-between;
 }
 
+/* chatmessages component */
 .chatMessagesContainer {
     margin: 10px auto;
     display: flex;
@@ -275,4 +276,10 @@ button {
 .chatMessageInput {
     display: flex;
     flex-direction: column;
+}
+
+.wall-container {
+    border: 3px solid black;
+    /* background-color: red; */
+    position: absolute;
 }
