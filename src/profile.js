@@ -6,17 +6,15 @@ export function Profile(props) {
     console.log("properties: ", props);
     return (
         <div className="profile-container">
+            <h2>
+                {props.first} {props.last}
+            </h2>
             <ProfilePic
                 className="profile-pic-big"
                 profilePicUrl={props.profilePicUrl}
             />
 
-            <div className="profile-info">
-                <h2>
-                    {props.first} {props.last}
-                </h2>
-                <BioEditor text={props.bio} onUpdateBio={props.onUpdateBio} />
-            </div>
+            <BioEditor text={props.bio} onUpdateBio={props.onUpdateBio} />
         </div>
     );
 }

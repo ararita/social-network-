@@ -18,6 +18,6 @@ class FriendNotifications extends React.Component {
 
 export default connect(function(state) {
     return {
-        // count: state.friends && state.friends.filter(i => i.status == 1).length
+        // count: state.friends && state.friends.filter(f => f.status == 1).length
     };
 })(FriendNotifications);

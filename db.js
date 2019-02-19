@@ -166,10 +166,12 @@ module.exports.addChatMessage = function(message, userId) {
 };
 
 //wall feature
+
+// Merge users table to include first, last and url
 module.exports.getWallPosts = function() {
     return db.query(
-        `SELECT * FROM wall,
-        ORDER BY id DESC,
+        `SELECT * FROM wall
+        ORDER BY id DESC
         LIMIT 10`
     );
 };
@@ -191,9 +193,11 @@ module.exports.addWallPosts = function(
 };
 
 // ADD WALL MESSAGE LINK
+
+// merge users table to include first, last and url
 module.exports.addWallPostsLink = (
     senderId,
-    firs,
+    first,
     last,
     url,
     message,
@@ -204,12 +208,12 @@ module.exports.addWallPostsLink = (
 ) => {
     return db.query(
         `
-        INSERT INTO wall (sender_id, first, last, url, messages, link, descriptions, publisher, picture)
+        INSERT INTO wall (sender_id, first, last, url, messages, link, description, publisher, picture)
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
         RETURNING *`,
         [
             senderId,
-            firs,
+            first,
             last,
             url,
             message,

@@ -11,6 +11,10 @@ const path = require("path");
 const app = express();
 const config = require("./config");
 const server = require("http").Server(app);
+const cheerio = require("cheerio");
+const request = require("request");
+const url = require("url");
+
 const io = require("socket.io")(server, { origins: "localhost:8080" });
 
 const diskStorage = multer.diskStorage({
@@ -70,7 +74,7 @@ if (process.env.NODE_ENV != "production") {
 
 app.get("/welcome", function(req, res) {
     if (req.session.userId) {
-        console.log("req.session.userId: ", req.session.userId);
+        // console.log("req.session.userId: ", req.session.userId);
         res.redirect("/");
     } else {
         res.sendFile(__dirname + "/index.html");
@@ -78,7 +82,7 @@ app.get("/welcome", function(req, res) {
 });
 
 app.post("/register", (req, res) => {
-    console.log("req.body: ", req.body);
+    // console.log("req.body: ", req.body);
     bcrypt
         .hashPassword(req.body.password)
         .then(hash => {
@@ -132,7 +136,7 @@ app.get("/user", (req, res) => {
     let userId = req.session.userId;
     db.getUserProfile(userId)
         .then(dbResult => {
-            console.log("dbresults: ", dbResult);
+            // console.log("dbresults: ", dbResult);
             res.json(dbResult.rows[0]);
         })
         .catch(err => {
@@ -160,7 +164,7 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     // console.log("req body: ", req.body);
     // console.log("req file: ", req.file);
     db.addImage(userId, config.s3Url + req.file.filename).then(({ rows }) => {
-        console.log("rows: ", rows);
+        // console.log("rows: ", rows);
         res.json(rows[0]);
     });
 });
@@ -206,11 +210,22 @@ app.post("/initial-friendship-status/:id/accept-friend-request", (req, res) => {
 app.get("/friends/list", (req, res) => {
     db.getFriendsAndWannabes(req.session.userId)
         .then(dbResult => {
-            console.log("dbResult from getFriendsAndWannabes", dbResult);
+            // console.log("dbResult from getFriendsAndWannabes", dbResult);
             res.json(dbResult);
         })
         .catch(err => {
             console.log("error while getting friendshiplists: ", err);
+        });
+});
+
+app.get("/getWallPosts", (req, res) => {
+    db.getWallPosts(req)
+        .then(dbResult => {
+            // console.log("this is result from /getWallPosts: ", dbResult);
+            res.json(dbResult.rows);
+        })
+        .catch(err => {
+            console.log("this is err from /getWallPosts", err);
         });
 });
 
@@ -330,22 +345,75 @@ io.on("connection", function(socket) {
     });
 
     //wall posts
-    db.getWallPosts()
-        .then(dbResults => {
-            console.log("results from getWallPosts: ", dbResults.rows);
-            socket.emit("wall messages", dbResults.rows);
-        })
-        .catch(err => {
-            console.log(err);
-        });
+    // db.getWallPosts()
+    //     .then(dbResults => {
+    //         console.log("results from getWallPosts: ", dbResults.rows);
+    //         socket.emit("wall messages", dbResults.rows);
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //     });
 
-    socket.on("new post from user", function(wallpost) {
-        console.log("this is wallpost: ", wallpost);
-        //run a query to insert it in database, and then emit, and make sure socket.on is working.
+    app.post("/wallPost", (req, res) => {
+        // let usersLink = url.parse(req.body.urlPost);
+        console.log("req in /wallPost:", req);
+        request(req.body.urlPost, { json: true }, (err, response, body) => {
+            if (err) {
+                return console.log(err);
+            }
+            const $ = cheerio.load(body);
+            // console.log("this is body from wallPost: ", body);
+            const title = $('meta[property="og:title"]').attr("content");
+            const picture = $('meta[property="og:image"]').attr("content");
+            const publisher = $('meta[property="og:site_name"]').attr(
+                "content"
+            );
+            const description = $('meta[property="og:description"]').attr(
+                "content"
+            );
+            const first = "test";
+            const last = "test1";
+            const message = "test message";
+            db.addWallPostsLink(
+                req.session.userId,
+                first,
+                last,
+                url,
+                message,
+                req.body.urlPost,
+                description,
+                publisher,
+                picture
+            )
+                .then(dbInfo => {
+                    res.json(dbInfo.rows);
+                    console.log("this is dbInfo.rows: ", dbInfo.rows);
+                })
+                .catch(err => {
+                    console.log("error in /wallpost: ", err);
+                });
+        });
     });
+
+    // db.addWallUrl(req.session.userId, wallId, wallPostDesc, wallPostImg, req.body.wallpost, wallPostTitle)
+    //             .then(() => {
+    //                 db.getWallPosts(wallId)
+    //                     .then(data => {
+    //                         for (let i = 0; i < data.rows.length; i++) {
+    //                             if (data.rows[i].wallpost_text) {
+    //                                 data.rows[i].wallpost_text = data.rows[i].wallpost_text.substring(0, 400);
+    //                             }
+    //                         }
+    //                         response.json(data.rows);
+    //                     }).catch(err => {console.log(err);} );
+    //             }).catch(err => { console.log(err); });
+    //     });
+    // socket.on("new post from user", function(wallpost) {
+    //     console.log("this is wallpost: ", wallpost);
+    //     //run a query to insert it in database, and then emit, and make sure socket.on is working.
+    // });
 });
 
 //davids steps:
-//make the ui to to submit a link
 //receive the link on the server, confirm youre getting it, console.log
 //make http request to go get the html page
