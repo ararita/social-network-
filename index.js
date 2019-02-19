@@ -14,6 +14,7 @@ const server = require("http").Server(app);
 const cheerio = require("cheerio");
 const request = require("request");
 const url = require("url");
+const moment = require("moment");
 
 const io = require("socket.io")(server, { origins: "localhost:8080" });
 
@@ -98,6 +99,10 @@ app.post("/register", (req, res) => {
             req.session.first = req.body.first;
             req.session.last = req.body.last;
 
+            console.log("req.session.userId ", req.session.userId);
+            console.log("req.sess.first", req.session.first);
+            console.log("req.session.last", req.session.last);
+
             res.json({ success: true });
         })
         .catch(err => {
@@ -164,7 +169,8 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     // console.log("req body: ", req.body);
     // console.log("req file: ", req.file);
     db.addImage(userId, config.s3Url + req.file.filename).then(({ rows }) => {
-        // console.log("rows: ", rows);
+        // console.log("rows in image upload: ", rows);
+        req.session.url = rows[0].url;
         res.json(rows[0]);
     });
 });
@@ -222,6 +228,17 @@ app.get("/getWallPosts", (req, res) => {
     db.getWallPosts(req)
         .then(dbResult => {
             // console.log("this is result from /getWallPosts: ", dbResult);
+
+            console.log("req.session.userId ", req.session.userId);
+            console.log("req.sess.first", req.session.first);
+            console.log("req.session.last", req.session.last);
+            console.log("req.session.url", req.session.url);
+            dbResult.rows.forEach(item => {
+                item.created_at = moment(item.created_at).format(
+                    "MMMM Do YYYY, h:mm:ss a"
+                );
+            });
+
             res.json(dbResult.rows);
         })
         .catch(err => {
@@ -258,18 +275,18 @@ io.on("connection", function(socket) {
     //this callback function will run whenever user logs in or registers;
     // socket is an object that represents the socket connection that just happened
 
-    console.log("socket.request.session: ", socket.request.session);
+    //console.log("socket.request.session: ", socket.request.session);
 
     const socketId = socket.id;
     const userId = socket.request.session.userId;
     // every socket has its on unique id, every time different
     onlineUsers[socket.id] = userId;
 
-    console.log("onlineUsers: ", onlineUsers);
-    console.log("onlineUsers[socket.id]: ", onlineUsers[socket.id]);
+    //console.log("onlineUsers: ", onlineUsers);
+    //console.log("onlineUsers[socket.id]: ", onlineUsers[socket.id]);
 
     let userIds = Object.values(onlineUsers);
-    console.log("userIds", userIds);
+    //console.log("userIds", userIds);
 
     //-------------socket events:-------------------
     //online users
@@ -314,10 +331,7 @@ io.on("connection", function(socket) {
     //chat messages:
     db.getChatMessages()
         .then(results => {
-            console.log(
-                "this are results.rows from getChatMessages",
-                results.rows
-            );
+            //console.log("this are results.rows from getChatMessages", results.rows);
             socket.emit("chatMessages", results.rows.reverse());
         })
         .catch(err => {
@@ -371,8 +385,9 @@ io.on("connection", function(socket) {
             const description = $('meta[property="og:description"]').attr(
                 "content"
             );
-            const first = "test";
-            const last = "test1";
+            const first = req.session.first;
+            const last = req.session.last;
+            const url = req.session.url;
             const message = "test message";
             db.addWallPostsLink(
                 req.session.userId,
@@ -386,6 +401,12 @@ io.on("connection", function(socket) {
                 picture
             )
                 .then(dbInfo => {
+                    dbInfo.rows.forEach(item => {
+                        item.created_at = moment(item.created_at).format(
+                            "MMMM Do YYYY, h:mm:ss a"
+                        );
+                    });
+
                     res.json(dbInfo.rows);
                     console.log("this is dbInfo.rows: ", dbInfo.rows);
                 })

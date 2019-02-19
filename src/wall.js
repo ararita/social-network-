@@ -79,12 +79,13 @@ class Wall extends React.Component {
                                         className="link-picture"
                                         src={item.picture}
                                     />
-                                    <p>
-                                        <strong>Description:</strong>{" "}
-                                        {item.description}
-                                    </p>
+                                    <p>{item.description}</p>
                                     <p>{item.link}</p>
-                                    <p>{item.created_at}</p>
+                                    <img className="link-url" src={item.url} />
+                                    <p>{item.created_at} by</p>
+                                    <p>
+                                        {item.first} {item.last}
+                                    </p>
                                 </div>
                             );
                         })}
