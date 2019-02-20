@@ -98,3 +98,14 @@ export function addWallMessage(post) {
         post: post
     };
 }
+
+//------------------friend request notification:-------to finish:
+// export function receiveFriendRequests() {
+//     return axios.get("/friendRequests").then(results => {
+//         console.log("these are results from receiveFriendRequests: ", results);
+//         return {
+//             type: "RECEIVE_FRIEND_REQUESTS"
+//             // list: results.data.request
+//         };
+//     });
+// }

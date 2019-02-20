@@ -415,26 +415,4 @@ io.on("connection", function(socket) {
                 });
         });
     });
-
-    // db.addWallUrl(req.session.userId, wallId, wallPostDesc, wallPostImg, req.body.wallpost, wallPostTitle)
-    //             .then(() => {
-    //                 db.getWallPosts(wallId)
-    //                     .then(data => {
-    //                         for (let i = 0; i < data.rows.length; i++) {
-    //                             if (data.rows[i].wallpost_text) {
-    //                                 data.rows[i].wallpost_text = data.rows[i].wallpost_text.substring(0, 400);
-    //                             }
-    //                         }
-    //                         response.json(data.rows);
-    //                     }).catch(err => {console.log(err);} );
-    //             }).catch(err => { console.log(err); });
-    //     });
-    // socket.on("new post from user", function(wallpost) {
-    //     console.log("this is wallpost: ", wallpost);
-    //     //run a query to insert it in database, and then emit, and make sure socket.on is working.
-    // });
 });
-
-//davids steps:
-//receive the link on the server, confirm youre getting it, console.log
-//make http request to go get the html page

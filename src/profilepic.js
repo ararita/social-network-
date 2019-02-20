@@ -1,7 +1,7 @@
 import React from "React";
 
 export default function ProfilePic(props) {
-    console.log("confirm: ", props);
+    console.log("props in ProfilePic: ", props);
     let imageUrl;
 
     if (props.profilePicUrl) {
@@ -13,7 +13,7 @@ export default function ProfilePic(props) {
     //props is an object that passes all the data from profilepic to the app
 
     return (
-        <div>
+        <div className="profile-pic-container">
             <img
                 className={props.className}
                 src={imageUrl}

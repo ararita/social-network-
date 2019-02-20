@@ -1,17 +1,62 @@
-body {
-    font-family: monospace;
-    box-sizing: border-box;
-    margin: 5px;
-
-    /* background: url("logo-big.png") no-repeat center center; */
+* {
 }
+
+html,
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: black;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100%;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    -webkit-animation: Gradient 15s ease infinite;
+    -moz-animation: Gradient 15s ease infinite;
+    animation: Gradient 15s ease infinite;
+}
+
 main {
     margin: 10px;
     display: flex;
     flex-direction: column;
-    /* text-align: center;
-    align-content: center; */
-    /* align-items: center; */
+}
+
+@-webkit-keyframes Gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@-moz-keyframes Gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes Gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 h1 {
@@ -29,6 +74,7 @@ h1 {
     left: 10%;
     border-radius: 10px;
     background: linear-gradient(#323335, #848485);
+    z-index: 100;
 }
 
 .modal button {
@@ -84,32 +130,33 @@ input {
     width: 1000px;
     margin-bottom: 40px;
 }
+.welcome-logo {
+    height: 500px;
+}
 
-.logo-large {
-    height: 400px;
+.house-logo {
+    height: 85%;
+    padding-left: 50px;
+}
+
+.welcome-logo,
+.house-logo {
     margin: 0 auto;
     display: flex;
-    justify-content: center;
-    animation: house-logo-float infinite 2s alternate;
+    animation: house-logo-float infinite 1.3s alternate;
 }
 
 @keyframes house-logo-float {
     0% {
-        transform: translateY(0);
+        transform: translateY(10);
     }
     100% {
-        transform: translateY(+20px);
+        transform: translateY(+10px);
     }
 }
 
 /* header component:  */
 .header-container {
-    /* width: 100%;
-    height: 150px;
-    padding-top: 32px;
-    position: fixed;
-    background-color: #f8f8f8;
-    z-index: 5; */
     display: inline-flex;
     width: 100%;
     height: 150px;
@@ -151,14 +198,15 @@ nav {
     left: 20px;
     border-radius: 85px;
     border: #00a2ff;
-    position: absolute;
-    top: 8%;
-    left: 92%;
+    position: relative;
+    top: 35px;
+    left: 1155px;
 }
 
 /* profile component:  */
 .profile-container {
     display: flex;
+    flex-direction: column;
     color: grey;
     /* width: 50%; */
     height: 500px;
@@ -167,15 +215,16 @@ nav {
     font-size: 20px;
     padding: 10px;
     overflow: scroll;
+    text-align: center;
 
     /* background: linear-gradient(#86d6e7, #c9e8ee); */
 }
 
-.profile-container h2 {
+/* .profile-container  {
     color: #00a2ff;
     text-decoration: underline;
     font-weight: lighter;
-}
+} */
 
 .profile-info {
     display: flex;
@@ -192,6 +241,11 @@ nav {
     margin-top: 10px;
     padding: 5px;
 }
+
+.profile-name {
+    display: block;
+    height: 10px;
+}
 /*
 .profile-info button {
     position: absolute;
@@ -199,20 +253,30 @@ nav {
     right: 148px;
 } */
 
-textarea {
-    height: 100px;
-    width: 300px;
-    border: 1px dotted black;
-    border-radius: 3px;
-    outline: none;
-    resize: none;
-    font-style: italic;
-}
-
 .bio {
     font-style: italic;
-    max-width: 250px;
+    /* max-width: 250px; */
+    width: 80%;
+    text-align: center;
+    padding-left: 100px;
+    padding-right: 100px;
+    font-size: 18px;
 }
+
+.bio-editor-wrapper {
+    text-align: center;
+}
+
+.bio-text {
+    width: 100%;
+}
+
+.update-button-div {
+}
+
+/* .bioeditor-wrapper {
+    width: 20%;
+} */
 
 button:hover {
     border-color: #ff0100;
@@ -293,15 +357,82 @@ button {
 
 /* wall: */
 .wall-container {
-    border: 1px solid black;
-    /* background-color: red; */
-    position: absolute;
-    height: inherit;
     height: 100%;
-    width: 80%;
+    text-align: center;
 }
 
 .link-picture {
-    height: 15%;
-    width: 15%;
+    height: 300px;
+    width: 500px;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+/* ------------------- */
+.wallpost-div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.wallpost-children {
+    display: flex;
+    flex-direction: column;
+    padding-left: 150px;
+    padding-right: 150px;
+    background-color: white;
+    margin: 0 auto;
+    width: 600px;
+    padding-top: 90px;
+    font-size: 20px;
+}
+
+.post-div {
+    margin-bottom: 50px;
+}
+
+hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 5px;
+}
+
+.btn-wall {
+    position: relative;
+    top: 30px;
+    right: 250px;
+}
+
+.wallInput {
+    position: relative;
+    left: 50px;
+}
+
+textarea {
+    position: relative;
+    left: 50px;
+    height: 100px;
+    width: 500px;
+    border: 1px dotted black;
+    border-radius: 3px;
+    font-style: italic;
+    font-size: 20px;
+}
+
+nav {
+    position: relative;
+    left: 30px;
+    bottom: 35px;
+}
+
+.links:hover {
+    color: pink;
+    font-weight: bold;
 }

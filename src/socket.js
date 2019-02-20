@@ -9,8 +9,8 @@ import {
     getChatMessages,
     loadChatMessage,
     getWallMessages,
-    addWallMessage,
-    receiveFriendsWannabes
+    addWallMessage
+    // receiveFriendRequests
 } from "./actions";
 
 let socket;
@@ -48,9 +48,10 @@ export function initSocket(store) {
             store.dispatch(addWallMessage(post));
         });
 
-        socket.on("friendRequestNotification", function(data) {
-            store.dispatch(receiveFriendsWannabes(data.status));
-        });
+        // socket.on("friendRequestNotification", function(data) {
+        //     console.log("this is data from friend reqest notification: ", data);
+        //     store.dispatch(receiveFriendRequests(data));
+        // });
     }
     return socket;
 }

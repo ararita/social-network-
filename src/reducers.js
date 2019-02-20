@@ -93,6 +93,13 @@ export function reducer(state = {}, action) {
         return state;
     }
 
-    console.log("reducer state: ", state);
-    return state;
+    //--------------friend reqest notification: --------finish it:
+    //     if (action.type == "RECEIVE_FRIEND_REQUESTS") {
+    //         state = {
+    //             ...state,
+    //             number: state.number
+    //         };
+    //     }
+    //     console.log("reducer state: ", state);
+    //     return state;
 }

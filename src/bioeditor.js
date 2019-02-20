@@ -52,7 +52,14 @@ export class BioEditor extends React.Component {
                 {this.state.bio && !this.state.isEditorVisible && (
                     <div className="bio">
                         <p>{this.state.bio}</p>
-                        <button onClick={this.showEditor}>update</button>
+                        <div className="update-button-div">
+                            <button
+                                className="update-button"
+                                onClick={this.showEditor}
+                            >
+                                update
+                            </button>
+                        </div>
                     </div>
                 )}
                 {!this.state.bio && !this.state.isEditorVisible && (

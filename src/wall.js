@@ -4,8 +4,10 @@ import axios from "./axios";
 import { initSocket } from "./socket";
 import { addWallMessage } from "./actions";
 import ProfilePic from "./profilepic";
+import MediaCard from "./mediacard";
+import Paper from "@material-ui/core/Paper";
 
-class Wall extends React.Component {
+export default class Wall extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -65,38 +67,46 @@ class Wall extends React.Component {
     render() {
         return (
             <div className="wall-container">
-                <textarea onChange={this.handleChange} name="wallInput" />
-                <button onClick={this.submitToWall} className="btn__wall">
-                    POST
-                </button>
-
+                <div className="post-div">
+                    <textarea onChange={this.handleChange} name="wallInput" />
+                    <button onClick={this.submitToWall} className="btn-wall">
+                        POST
+                    </button>
+                </div>
                 {this.state.wallPost && (
-                    <div>
+                    <div className="wallpost-div">
                         {this.state.wallPost.map(item => {
                             return (
-                                <div key={item.id}>
+                                <div
+                                    key={item.id}
+                                    className="wallpost-children"
+                                >
                                     <img
                                         className="link-picture"
                                         src={item.picture}
                                     />
                                     <p>{item.description}</p>
-                                    <p>{item.link}</p>
+                                    <a target="_blank" href={item.link}>
+                                        {item.link}
+                                    </a>
                                     <img className="link-url" src={item.url} />
-                                    <p>{item.created_at} by</p>
                                     <p>
+                                        {item.created_at} posted by: {""}
                                         {item.first} {item.last}
                                     </p>
+                                    <hr />
                                 </div>
                             );
                         })}
                     </div>
                 )}
+                {/*// <MediaCard wallPost={this.state.wallPost} />*/}
             </div>
         );
     }
 }
 
-const mapStateToProps = function(state) {
-    return { posts: state.posts };
-};
-export default connect(mapStateToProps)(Wall);
+// const mapStateToProps = function(state) {
+//     return { posts: state.posts };
+// };
+// export default connect(mapStateToProps)(Wall);

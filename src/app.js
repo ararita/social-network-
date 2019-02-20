@@ -11,7 +11,7 @@ import { ConnectedFriends } from "./friends";
 import { ConnectedOnlineUsers } from "./onlineusers";
 import { ConnectedChatMessages } from "./chatmessages";
 import Wall from "./wall";
-import FriendNotifications from "./friendNotifications";
+// import FriendNotifications from "./friendNotifications";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -81,17 +81,16 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <div>
-                <Header
-                    showUploader={this.showUploader}
-                    profilePicUrl={this.state.profilePicUrl}
-                    updateProfileUrl={this.updateProfileUrl}
-                    first={this.state.first}
-                    last={this.state.last}
-                />
-                <FriendNotifications />
-
-                <BrowserRouter>
+            <BrowserRouter>
+                <div>
+                    <Header
+                        showUploader={this.showUploader}
+                        profilePicUrl={this.state.profilePicUrl}
+                        updateProfileUrl={this.updateProfileUrl}
+                        first={this.state.first}
+                        last={this.state.last}
+                    />
+                    {/* <FriendNotifications />*/}
                     <div>
                         {this.state.uploaderIsVisible && (
                             <Uploader
@@ -132,7 +131,7 @@ export default class App extends React.Component {
                                 render={() => <ConnectedFriends />}
                             />
                             <Route
-                                path="/online"
+                                path="/onlineusers"
                                 render={() => <ConnectedOnlineUsers />}
                             />
                             <Route
@@ -142,8 +141,8 @@ export default class App extends React.Component {
                             <Redirect path="*" to="/" />
                         </Switch>
                     </div>
-                </BrowserRouter>
-            </div>
+                </div>
+            </BrowserRouter>
         );
     }
 }
