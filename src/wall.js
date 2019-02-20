@@ -92,7 +92,7 @@ export default class Wall extends React.Component {
                                     <img className="link-url" src={item.url} />
                                     <p>
                                         {item.created_at} posted by: {""}
-                                        {item.first} {item.last}
+                                        {item.first} {item.last} {item.url}
                                     </p>
                                     <hr />
                                 </div>

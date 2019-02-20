@@ -40,71 +40,71 @@ class ChatMessages extends React.Component {
             return null;
         }
         return (
-            // <div className="chatMessagesBox">
-            <div className="chatMessagesContainer">
-                {this.props.chatMessages.length == 0 && (
-                    <p id="noMessagesP">Send message to your friends!</p>
-                )}
-                {this.props.chatMessages && (
-                    <div
-                        className="chatMessagesContainer-messages"
-                        ref={elem => (this.elem = elem)}
-                    >
-                        {this.props.chatMessages &&
-                            this.props.chatMessages.map(msg => {
-                                return (
-                                    <div
-                                        key={msg.message_id}
-                                        className="chatMessageItem"
-                                    >
-                                        <Link
-                                            to={`/user/${msg.sender_id}`}
-                                            className="chatMessageItemPicture"
+            <div className="chatMessagesBox">
+                <div className="chatMessagesContainer">
+                    {this.props.chatMessages.length == 0 && (
+                        <p id="noMessagesP">Send message to your friends!</p>
+                    )}
+                    {this.props.chatMessages && (
+                        <div
+                            className="chatMessagesContainer-messages"
+                            ref={elem => (this.elem = elem)}
+                        >
+                            {this.props.chatMessages &&
+                                this.props.chatMessages.map(msg => {
+                                    return (
+                                        <div
+                                            key={msg.message_id}
+                                            className="chatMessageItem"
                                         >
-                                            <img
-                                                src={
-                                                    msg.sender_url ||
-                                                    "/profilepic.png"
-                                                }
-                                            />
-                                        </Link>
-                                        <div className="chatMessageItemInfo">
-                                            <p>
-                                                <span className="message-sender">
-                                                    {msg.sender_first}{" "}
-                                                    {msg.sender_last}
-                                                </span>{" "}
-                                                <span className="message-date">
-                                                    on{" "}
-                                                    {msg.message_created_at.slice(
-                                                        0,
-                                                        10
-                                                    )}
-                                                    ,{" "}
-                                                    {msg.message_created_at.slice(
-                                                        14,
-                                                        19
-                                                    )}
-                                                </span>
-                                            </p>
-                                            <p className="message-content">
-                                                {msg.message}
-                                            </p>
+                                            <Link
+                                                to={`/user/${msg.sender_id}`}
+                                                className="chatMessageItemPicture"
+                                            >
+                                                <img
+                                                    src={
+                                                        msg.sender_url ||
+                                                        "/profilepic.png"
+                                                    }
+                                                />
+                                            </Link>
+                                            <div className="chatMessageItemInfo">
+                                                <p>
+                                                    <span className="message-sender">
+                                                        {msg.sender_first}{" "}
+                                                        {msg.sender_last}
+                                                    </span>{" "}
+                                                    <span className="message-date">
+                                                        on{" "}
+                                                        {msg.message_created_at.slice(
+                                                            0,
+                                                            10
+                                                        )}
+                                                        ,{" "}
+                                                        {msg.message_created_at.slice(
+                                                            14,
+                                                            19
+                                                        )}
+                                                    </span>
+                                                </p>
+                                                <p className="message-content">
+                                                    {msg.message}
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                );
-                            })}
+                                    );
+                                })}
+                        </div>
+                    )}
+                    <div className="chatMessageInput">
+                        <textarea
+                            value={this.state.textOfMessage}
+                            onChange={this.handleChange}
+                        />
+                        <button onClick={this.sendMessage}>SEND MESSAGE</button>
                     </div>
-                )}
-                <div className="chatMessageInput">
-                    <textarea
-                        value={this.state.textOfMessage}
-                        onChange={this.handleChange}
-                    />
-                    <button onClick={this.sendMessage}>SEND MESSAGE</button>
                 </div>
             </div>
-            // </div>
         );
     }
 }
