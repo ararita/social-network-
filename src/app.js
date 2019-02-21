@@ -11,17 +11,23 @@ import { ConnectedFriends } from "./friends";
 import { ConnectedOnlineUsers } from "./onlineusers";
 import { ConnectedChatMessages } from "./chatmessages";
 import Wall from "./wall";
+import PlayerModal from "./playermodal";
+
 // import FriendNotifications from "./friendNotifications";
 
 export default class App extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            uploaderIsVisible: false,
+            showMusicPlayer: false
+        };
         this.showUploader = this.showUploader.bind(this);
         this.updateProfileUrl = this.updateProfileUrl.bind(this);
         this.onUpdateBio = this.onUpdateBio.bind(this);
-        this.state = {
-            uploaderIsVisible: false
-        };
+        this.showMusicPlayer = this.showMusicPlayer.bind(this);
+        this.hidePlayerModal = this.hidePlayerModal.bind(this);
 
         // this.changePictureUrl = this.changePictureUrl.bind(this);---pitaj sta znaci
     }
@@ -63,6 +69,17 @@ export default class App extends React.Component {
         });
     }
 
+    showMusicPlayer() {
+        this.setState({
+            playerIsVisible: true
+        });
+    }
+
+    hidePlayerModal() {
+        this.setState({
+            playerIsVisible: false
+        });
+    }
     updateProfileUrl(url) {
         this.setState({
             uploaderIsVisible: false,
@@ -85,6 +102,7 @@ export default class App extends React.Component {
                 <div>
                     <Header
                         showUploader={this.showUploader}
+                        showMusicPlayer={this.showMusicPlayer}
                         profilePicUrl={this.state.profilePicUrl}
                         updateProfileUrl={this.updateProfileUrl}
                         first={this.state.first}
@@ -97,12 +115,17 @@ export default class App extends React.Component {
                                 updateProfileUrl={this.updateProfileUrl}
                             />
                         )}
+                        <PlayerModal
+                            playerIsVisible={this.state.playerIsVisible}
+                            hidePlayerModal={this.hidePlayerModal}
+                        />
+
                         <Switch>
                             <Route
                                 exact
                                 path="/"
                                 render={() => (
-                                    <div>
+                                    <div className="profile-div">
                                         <Profile
                                             bio={this.state.bio}
                                             first={this.state.first}
@@ -115,6 +138,7 @@ export default class App extends React.Component {
                                     </div>
                                 )}
                             />
+
                             <Route
                                 path="/home"
                                 render={() => (

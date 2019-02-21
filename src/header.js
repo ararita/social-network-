@@ -10,7 +10,10 @@ export default class Header extends React.Component {
     render() {
         return (
             <div className="header-container">
-                <Logo className="logo-small" />
+                <Logo
+                    className="logo-small"
+                    showMusicPlayer={this.props.showMusicPlayer}
+                />
 
                 <ProfilePic
                     className="profile-pic-small"

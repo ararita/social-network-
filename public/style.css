@@ -147,6 +147,13 @@ input {
     animation: house-logo-float infinite 1.3s alternate;
 }
 
+.house-logo:hover,
+.profile-pic-small:hover,
+.btn-wall:hover,
+.close-btn:hover {
+    cursor: pointer;
+}
+
 @keyframes house-logo-float {
     0% {
         transform: translateY(10);
@@ -297,6 +304,10 @@ button {
 .friends-wrapper {
     display: flex;
     flex-direction: column;
+    position: relative;
+    left: 18%;
+    z-index: 100;
+    width: 50%;
     /* justify-content: space-around; */
 }
 
@@ -323,10 +334,26 @@ button {
     color: #00a2ff;
 }
 
-.friend-info {
+.friend-info-div {
     display: inline-flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.each-div {
+    margin: 20px;
+}
+
+.friend-name {
+    text-align: center;
+}
+
+.friend-img {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
 }
 
 /* chatmessages component */
@@ -457,9 +484,78 @@ textarea {
 }
 
 .post-div {
-    margin-top: 20px;
+    margin-top: 30px;
+    margin-bottom: 15px;
     padding: 20px;
     padding-bottom: 40px;
     width: 700px;
     background-color: lightgray;
+    position: relative;
+    left: 340px;
 }
+
+.search-bar {
+    display: inline-flex;
+    justify-content: center;
+    width: 320px;
+}
+
+.search-bar input {
+    width: 60%;
+}
+
+.video-item img {
+    max-width: 64px;
+}
+
+.video-detail .details {
+    display: none;
+}
+
+.list-group-item {
+    cursor: pointer;
+}
+
+.list-group-item:hover {
+    background-color: #eee;
+}
+
+.video-div {
+    height: 100%;
+    width: 100%;
+}
+
+.loading {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.close-btn {
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+    font-weight: bolder;
+    font-size: 17px;
+}
+
+/* player modal */
+
+.back-state {
+    position: absolute;
+    z-index: -10;
+    height: 100px;
+    /* border: 1px solid black; */
+}
+
+.front-state {
+    position: fixed;
+    z-index: 10;
+    height: 100px;
+    /* border: 1px solid black; */
+}
+
+/* for gradient */
+
+/* background-size: cover;
+background-repeat: no-repeat; */

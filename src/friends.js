@@ -23,24 +23,39 @@ export class Friends extends React.Component {
                     {this.props.wannabes &&
                         this.props.wannabes.map(i => {
                             return (
-                                <div className="friend-info" key={i.id}>
-                                    {
-                                        <Link to={`/user/${i.id}`} key={i.id}>
-                                            {i.first} {i.last}
-                                            <img
-                                                src={i.url || "/default.png"}
-                                            />
-                                        </Link>
-                                    }
-                                    <button
-                                        onClick={() =>
-                                            this.props.dispatch(
-                                                acceptFriendRequest(i.id)
-                                            )
+                                <div className="friend-info-div" key={i.id}>
+                                    <div className="each-div">
+                                        {
+                                            <Link
+                                                to={`/user/${i.id}`}
+                                                key={i.id}
+                                            >
+                                                <div>
+                                                    <img
+                                                        className="friend-img"
+                                                        src={
+                                                            i.url ||
+                                                            "/default.png"
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="friend-name">
+                                                    {i.first} {i.last}
+                                                </div>
+                                            </Link>
                                         }
-                                    >
-                                        ACCEPT
-                                    </button>
+                                    </div>
+                                    <div className="each-div">
+                                        <button
+                                            onClick={() =>
+                                                this.props.dispatch(
+                                                    acceptFriendRequest(i.id)
+                                                )
+                                            }
+                                        >
+                                            ACCEPT
+                                        </button>
+                                    </div>
                                 </div>
                             );
                         })}
@@ -51,11 +66,12 @@ export class Friends extends React.Component {
                     {this.props.friends &&
                         this.props.friends.map(i => {
                             return (
-                                <div className="friend-info" key={i.id}>
+                                <div className="friend-info-div" key={i.id}>
                                     {
                                         <Link to={`/user/${i.id}`} key={i.id}>
                                             {i.first} {i.last}
                                             <img
+                                                className="friend-img"
                                                 src={i.url || "/default.png"}
                                             />
                                         </Link>
