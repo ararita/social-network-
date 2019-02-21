@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { allOnlineUsers } from "./actions";
 
 class OnlineUsers extends React.Component {
@@ -21,10 +21,12 @@ class OnlineUsers extends React.Component {
                     return (
                         <div key={user.id}>
                             <img src={user.url || "/public/default.png"} />
-                            <p>
-                                {user.first}
-                                {user.last}
-                            </p>
+                            <Link to={`/user/${user.id}`}>
+                                <p>
+                                    {user.first}
+                                    {user.last}
+                                </p>
+                            </Link>
                         </div>
                     );
                 })}
@@ -43,6 +45,9 @@ class OnlineUsers extends React.Component {
 }
 
 const mapStateToProps = function(state) {
+    if (!state) {
+        return null;
+    }
     console.log("this is state: ", state);
     if (!state.onlineUsers) {
         return {};

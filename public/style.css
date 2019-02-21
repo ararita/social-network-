@@ -1,4 +1,5 @@
 * {
+    font-family: "Quicksand", sans-serif;
 }
 
 html,
@@ -61,7 +62,7 @@ main {
 
 h1 {
     color: #00a2ff;
-    font-family: monospace;
+    /* font-family: monospace; */
     font-weight: lighter;
     font-size: 32px;
 }
@@ -295,25 +296,25 @@ button {
 
 .friends-wrapper {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    /* justify-content: space-around; */
 }
 
 .friends-box {
-    margin: 10px auto;
     color: grey;
-    width: 600px;
-    height: 60vh;
-    border-radius: 5px;
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3);
     font-size: 15px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
+
+    padding-left: 150px;
+    padding-right: 150px;
+    background-color: white;
+    margin: 0 auto;
+    width: 600px;
+    padding-top: 90px;
+    font-size: 20px;
 }
 
 .friends-box:hover {
-    transform: scale(1.03);
+    /* transform: scale(1.03); */
 }
 
 .friends-box a {
@@ -330,7 +331,7 @@ button {
 
 /* chatmessages component */
 .chatMessagesContainer {
-    margin: 10px auto;
+    /* margin: 10px auto;
     display: flex;
     color: grey;
     width: 50%;
@@ -339,6 +340,14 @@ button {
     font-size: 20px;
     padding: 10px;
     flex-direction: column;
+    background-color: white; */
+    padding-left: 150px;
+    padding-right: 150px;
+    background-color: white;
+    margin: 0 auto;
+    width: 600px;
+    padding-top: 90px;
+    font-size: 20px;
 }
 
 .chatMessagesContainer img {
@@ -349,6 +358,21 @@ button {
     border: #00a2ff;
     top: 20px;
     left: 92%;
+}
+
+.chatmessage-item {
+    margin: 10px auto;
+    color: grey;
+    width: 600px;
+    height: 60vh;
+    border-radius: 5px;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3);
+    font-size: 15px;
+    padding: 10px;
+    padding: 30px;
+    display: flex;
+    /* flex-wrap: wrap;
+    border: 1px solid darkgrey; */
 }
 
 .chatMessageInput {
@@ -403,30 +427,11 @@ button {
     display: block;
     margin: 0 auto;
     padding: 5px;
+    color: #00a2ff;
 }
 
 .post-div {
     margin-bottom: 50px;
-}
-
-hr {
-    /* display: block;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    margin-left: auto;
-    margin-right: auto;
-    border-style: inset;
-    border-width: 5px; */
-    /* display: block;
-    unicode-bidi: isolate;
-    margin-block-start: 0.5em;
-    margin-block-end: 0.5em;
-    margin-inline-start: auto;
-    margin-inline-end: auto;
-    overflow: hidden;
-    border-style: inset;
-    border-width: 1px;
-    margin-top: 10px; */
 }
 
 .btn-wall {

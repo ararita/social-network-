@@ -227,7 +227,7 @@ app.get("/friends/list", (req, res) => {
 app.get("/getWallPosts", (req, res) => {
     db.getWallPosts(req)
         .then(dbResult => {
-            // console.log("this is result from /getWallPosts: ", dbResult);
+            console.log("this is result from /getWallPosts: ", dbResult);
 
             console.log("req.session.userId ", req.session.userId);
             console.log("req.sess.first", req.session.first);

@@ -7,7 +7,7 @@ import ProfilePic from "./profilepic";
 import MediaCard from "./mediacard";
 import Paper from "@material-ui/core/Paper";
 
-export default class Wall extends React.Component {
+class Wall extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -35,9 +35,10 @@ export default class Wall extends React.Component {
     submitToWall() {
         axios.post("/wallPost", { urlPost: this.wallInput }).then(results => {
             this.setState({
-                wallPost: [...this.state.wallPost, results.data[0]]
+                wallPost: [results.data[0], ...this.state.wallPost]
             });
-            console.log("this.state.wallPost:", this.state.wallPost);
+            this.wallInput.value = "";
+            // console.log("this.state.wallPost:", this.state.wallPost);
             // });
             // console.log("results.data", results.data);
             // let wallPostResults = results.data;
@@ -68,7 +69,13 @@ export default class Wall extends React.Component {
         return (
             <div className="wall-container">
                 <div className="post-div">
-                    <textarea onChange={this.handleChange} name="wallInput" />
+                    <textarea
+                        onChange={this.handleChange}
+                        name="wallInput"
+                        ref={elem => {
+                            this.wallInput = elem;
+                        }}
+                    />
                     <button onClick={this.submitToWall} className="btn-wall">
                         POST
                     </button>
@@ -106,7 +113,10 @@ export default class Wall extends React.Component {
     }
 }
 
-// const mapStateToProps = function(state) {
-//     return { posts: state.posts };
-// };
-// export default connect(mapStateToProps)(Wall);
+const mapStateToProps = function(state) {
+    if (!state) {
+        return null;
+    }
+    return { posts: state.posts };
+};
+export default connect(mapStateToProps)(Wall);

@@ -27,6 +27,9 @@ export class Friends extends React.Component {
                                     {
                                         <Link to={`/user/${i.id}`} key={i.id}>
                                             {i.first} {i.last}
+                                            <img
+                                                src={i.url || "/default.png"}
+                                            />
                                         </Link>
                                     }
                                     <button
@@ -52,6 +55,9 @@ export class Friends extends React.Component {
                                     {
                                         <Link to={`/user/${i.id}`} key={i.id}>
                                             {i.first} {i.last}
+                                            <img
+                                                src={i.url || "/default.png"}
+                                            />
                                         </Link>
                                     }
 
@@ -65,7 +71,7 @@ export class Friends extends React.Component {
                                 </div>
                             );
                         })}
-                </div>
+                </div>{" "}
             </div>
         );
     }
@@ -73,6 +79,9 @@ export class Friends extends React.Component {
 
 //this function will run everytime the redux state is updated
 const mapStateToProps = function(state) {
+    if (!state) {
+        return null;
+    }
     // console.log("state in mapStateToProps: ", state);
     if (!state.friendsList) {
         return {};
