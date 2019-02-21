@@ -456,8 +456,10 @@ textarea {
     font-size: 20px;
 }
 
-nav {
-    position: relative;
-    left: 30px;
-    bottom: 35px;
+.post-div {
+    margin-top: 20px;
+    padding: 20px;
+    padding-bottom: 40px;
+    width: 700px;
+    background-color: lightgray;
 }

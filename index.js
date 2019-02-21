@@ -17,6 +17,10 @@ const url = require("url");
 const moment = require("moment");
 
 const io = require("socket.io")(server, { origins: "localhost:8080" });
+app.use(function(req, res, next) {
+    console.log(req.url);
+    next();
+});
 
 const diskStorage = multer.diskStorage({
     destination: function(req, file, callback) {

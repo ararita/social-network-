@@ -4,8 +4,10 @@ import axios from "./axios";
 import { initSocket } from "./socket";
 import { addWallMessage } from "./actions";
 import ProfilePic from "./profilepic";
-import MediaCard from "./mediacard";
-import Paper from "@material-ui/core/Paper";
+// import { Link } from "react-router-dom";
+
+// import MediaCard from "./mediacard";
+// import Paper from "@material-ui/core/Paper";
 
 class Wall extends React.Component {
     constructor(props) {
@@ -99,8 +101,11 @@ class Wall extends React.Component {
                                     <img className="link-url" src={item.url} />
                                     <p>
                                         {item.created_at} posted by: {""}
-                                        {item.first} {item.last} {item.url}
+                                        {item.first} {item.last}
                                     </p>
+
+                                    <img src={item.url || "/default.png"} />
+
                                     <hr />
                                 </div>
                             );
