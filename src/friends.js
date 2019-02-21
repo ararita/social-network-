@@ -47,6 +47,7 @@ export class Friends extends React.Component {
                                     </div>
                                     <div className="each-div">
                                         <button
+                                            className="friend-btn"
                                             onClick={() =>
                                                 this.props.dispatch(
                                                     acceptFriendRequest(i.id)
@@ -67,23 +68,39 @@ export class Friends extends React.Component {
                         this.props.friends.map(i => {
                             return (
                                 <div className="friend-info-div" key={i.id}>
-                                    {
-                                        <Link to={`/user/${i.id}`} key={i.id}>
-                                            {i.first} {i.last}
-                                            <img
-                                                className="friend-img"
-                                                src={i.url || "/default.png"}
-                                            />
-                                        </Link>
-                                    }
-
-                                    <button
-                                        onClick={() =>
-                                            this.props.dispatch(unFriend(i.id))
+                                    <div className="each-div">
+                                        {
+                                            <Link
+                                                to={`/user/${i.id}`}
+                                                key={i.id}
+                                            >
+                                                <div>
+                                                    <img
+                                                        className="friend-img"
+                                                        src={
+                                                            i.url ||
+                                                            "/default.png"
+                                                        }
+                                                    />
+                                                    <div className="friend-name">
+                                                        {i.first} {i.last}
+                                                    </div>
+                                                </div>
+                                            </Link>
                                         }
-                                    >
-                                        REMOVE FRIEND
-                                    </button>
+                                        <div className="each-div">
+                                            <button
+                                                className="friend-btn"
+                                                onClick={() =>
+                                                    this.props.dispatch(
+                                                        unFriend(i.id)
+                                                    )
+                                                }
+                                            >
+                                                REMOVE FRIEND
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             );
                         })}

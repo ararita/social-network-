@@ -52,7 +52,9 @@ export class Login extends React.Component {
                     type="password"
                     onChange={this.handleChange}
                 />
-                <button onClick={this.submit}>Log in</button>
+                <button className="login-btn" onClick={this.submit}>
+                    Log in
+                </button>
 
                 <Link to="/">
                     <h4> Back to registration</h4>

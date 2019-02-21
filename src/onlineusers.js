@@ -19,8 +19,11 @@ class OnlineUsers extends React.Component {
             <div>
                 {onlineUsers.map(user => {
                     return (
-                        <div key={user.id}>
-                            <img src={user.url || "/public/default.png"} />
+                        <div className="online-user-div" key={user.id}>
+                            <img
+                                className="online-img"
+                                src={user.url || "/default.png"}
+                            />
                             <Link to={`/user/${user.id}`}>
                                 <p>
                                     {user.first}

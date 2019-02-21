@@ -16,6 +16,8 @@ body {
     -webkit-animation: Gradient 15s ease infinite;
     -moz-animation: Gradient 15s ease infinite;
     animation: Gradient 15s ease infinite;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 main {
@@ -97,15 +99,23 @@ h1 {
     overflow: auto;
 }
 
-.welcome-container p {
-    color: #00a2ff;
+.welcome-info {
+    color: white;
     font-size: 30px;
     text-align: center;
 }
 
 .welcome-container h4 {
-    color: #00a2ff;
+    color: white;
+    font-size: 20px;
     text-align: center;
+}
+
+.welcome-title {
+    color: white;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
 }
 
 .form {
@@ -144,7 +154,7 @@ input {
 .house-logo {
     margin: 0 auto;
     display: flex;
-    animation: house-logo-float infinite 1.3s alternate;
+    animation: house-logo-float infinite 1.2s alternate;
 }
 
 .house-logo:hover,
@@ -159,7 +169,7 @@ input {
         transform: translateY(10);
     }
     100% {
-        transform: translateY(+10px);
+        transform: translateY(+12px);
     }
 }
 
@@ -215,16 +225,22 @@ nav {
 /* profile component:  */
 .profile-container {
     display: flex;
+    width: 50%;
+    position: relative;
+    left: 25%;
+    /* justify-content: initial; */
     flex-direction: column;
     color: grey;
     /* width: 50%; */
-    height: 500px;
+    /* height: 500px; */
     border-radius: 5px;
     box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3);
     font-size: 20px;
     padding: 10px;
-    overflow: scroll;
+    /* overflow: scroll; */
     text-align: center;
+    background-color: white;
+    /* background: linear-gradient(#86d6e7, #c9e8ee); */
 
     /* background: linear-gradient(#86d6e7, #c9e8ee); */
 }
@@ -254,6 +270,8 @@ nav {
 .profile-name {
     display: block;
     height: 10px;
+    font-weight: bold;
+    font-size: 20px;
 }
 /*
 .profile-info button {
@@ -278,6 +296,11 @@ nav {
 
 .bio-text {
     width: 100%;
+}
+
+.bio-info {
+    /* color: white; */
+    font-weight: bold;
 }
 
 .update-button-div {
@@ -305,7 +328,7 @@ button {
     display: flex;
     flex-direction: column;
     position: relative;
-    left: 18%;
+    left: 20%;
     z-index: 100;
     width: 50%;
     /* justify-content: space-around; */
@@ -356,6 +379,10 @@ button {
     border-radius: 50%;
 }
 
+/* .friend-btn {
+    position: relative;
+    left: 10%;
+} */
 /* chatmessages component */
 .chatMessagesContainer {
     /* margin: 10px auto;
@@ -375,6 +402,8 @@ button {
     width: 600px;
     padding-top: 90px;
     font-size: 20px;
+    position: relative;
+    left: 20px;
 }
 
 .chatMessagesContainer img {
@@ -411,6 +440,13 @@ button {
 .wall-container {
     height: 100%;
     text-align: center;
+}
+
+.sender-img,
+.online-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
 
 .link-picture {
@@ -555,7 +591,9 @@ textarea {
     /* border: 1px solid black; */
 }
 
-/* for gradient */
-
-/* background-size: cover;
-background-repeat: no-repeat; */
+.online-user-div {
+    background-color: white;
+    width: 150px;
+    margin: 0 auto;
+    text-align: center;
+}

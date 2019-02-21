@@ -90,6 +90,14 @@ class Wall extends React.Component {
                                     key={item.id}
                                     className="wallpost-children"
                                 >
+                                    <p>
+                                        {item.created_at} posted by: {""}
+                                        {item.first} {item.last}
+                                    </p>
+                                    <img
+                                        className="sender-img"
+                                        src={item.url || "/default.png"}
+                                    />
                                     <img
                                         className="link-picture"
                                         src={item.picture}
@@ -99,12 +107,6 @@ class Wall extends React.Component {
                                         {item.link}
                                     </a>
                                     <img className="link-url" src={item.url} />
-                                    <p>
-                                        {item.created_at} posted by: {""}
-                                        {item.first} {item.last}
-                                    </p>
-
-                                    <img src={item.url || "/default.png"} />
 
                                     <hr />
                                 </div>
