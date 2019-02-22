@@ -296,7 +296,7 @@ io.on("connection", function(socket) {
     //online users
     db.getUsersByIds(userIds)
         .then(data => {
-            console.log("Data get usersByID: ", data.rows);
+            // console.log("********************Data get usersByID: ", data.rows);
             socket.emit(
                 "onlineUsers",
                 data.rows.filter(i => {
@@ -314,9 +314,11 @@ io.on("connection", function(socket) {
 
     //USER JOINS
     const filteredOwnUserIds = userIds.filter(id => id == userId);
+    console.log("userIds", userIds);
     if (filteredOwnUserIds.length == 1) {
         db.getJoinedUser(userId)
             .then(dbResults => {
+                // console.log("------------------dbResults", dbResults.rows[0]);
                 socket.broadcast.emit("userJoined", dbResults.rows[0]);
             })
             .catch(err => {
@@ -327,6 +329,7 @@ io.on("connection", function(socket) {
     // USER LEAVES
     socket.on("disconnect", function() {
         delete onlineUsers[socketId];
+        console.log("online users:", onlineUsers);
         if (Object.values(onlineUsers).indexOf(userId) == -1) {
             io.sockets.emit("userLeft", userId);
         }

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { allOnlineUsers } from "./actions";
+// import { allOnlineUsers } from "./actions";
 
 class OnlineUsers extends React.Component {
     constructor(props) {
@@ -14,22 +14,24 @@ class OnlineUsers extends React.Component {
         if (!onlineUsers) {
             return null;
         }
-
+        console.log(onlineUsers);
         const listOnlineUsers = (
-            <div>
-                {onlineUsers.map(user => {
+            <div className="online-users-wrapper">
+                {onlineUsers.map((user, i) => {
                     return (
-                        <div className="online-user-div" key={user.id}>
-                            <img
-                                className="online-img"
-                                src={user.url || "/default.png"}
-                            />
-                            <Link to={`/user/${user.id}`}>
-                                <p>
-                                    {user.first}
-                                    {user.last}
-                                </p>
-                            </Link>
+                        <div className="online-user-div" key={i}>
+                            <div className="online-box">
+                                <img
+                                    className="online-img"
+                                    src={user.url || "/default.png"}
+                                />
+                                <Link to={`/user/${user.id}`}>
+                                    <p>
+                                        {user.first}
+                                        {user.last}
+                                    </p>
+                                </Link>
+                            </div>
                         </div>
                     );
                 })}

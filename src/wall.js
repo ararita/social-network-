@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import axios from "./axios";
 import { initSocket } from "./socket";
-import { addWallMessage } from "./actions";
-import ProfilePic from "./profilepic";
+// import { addWallMessage } from "./actions";
+// import ProfilePic from "./profilepic";
 // import { Link } from "react-router-dom";
 
 // import MediaCard from "./mediacard";
@@ -90,14 +90,16 @@ class Wall extends React.Component {
                                     key={item.id}
                                     className="wallpost-children"
                                 >
-                                    <p>
-                                        {item.created_at} posted by: {""}
-                                        {item.first} {item.last}
-                                    </p>
                                     <img
                                         className="sender-img"
                                         src={item.url || "/default.png"}
                                     />
+                                    <p>
+                                        {item.created_at} <br />
+                                        posted by: {""}
+                                        {item.first} {item.last}
+                                    </p>
+
                                     <img
                                         className="link-picture"
                                         src={item.picture}
@@ -106,8 +108,6 @@ class Wall extends React.Component {
                                     <a target="_blank" href={item.link}>
                                         {item.link}
                                     </a>
-                                    <img className="link-url" src={item.url} />
-
                                     <hr />
                                 </div>
                             );
@@ -121,9 +121,7 @@ class Wall extends React.Component {
 }
 
 const mapStateToProps = function(state) {
-    if (!state) {
-        return null;
-    }
+    console.log("state in wall component", state);
     return { posts: state.posts };
 };
 export default connect(mapStateToProps)(Wall);

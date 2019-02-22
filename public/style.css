@@ -70,6 +70,15 @@ h1 {
 }
 
 .modal {
+    /* position: absolute;
+    background: #ff4742;
+    text-align: center;
+    top: 9%;
+    right: 2%;
+    width: 20%;
+    height: 12%;
+    z-index: 1000;
+    border-radius: 0.3rem; */
     width: 80%;
     height: 65%;
     position: absolute;
@@ -193,10 +202,11 @@ input {
 .links {
     position: relative;
     padding: 15px;
-    font-size: 20px;
+    right: 100px;
+    font-size: 25px;
     text-decoration: none;
     color: #00a2ff;
-    border-right: solid 0.5px #00a2ff;
+    /* border-right: solid 0.5px #00a2ff; */
 }
 
 .links:hover {
@@ -209,6 +219,8 @@ nav {
     flex-direction: row;
     margin-top: 97px;
     margin-left: 16px;
+    position: relative;
+    margin-bottom: 10px;
 }
 
 .profile-pic-small {
@@ -224,6 +236,7 @@ nav {
 
 /* profile component:  */
 .profile-container {
+    margin-top: 5px;
     display: flex;
     width: 1000px;
     position: relative;
@@ -244,8 +257,14 @@ nav {
 }
 .save-btn {
     position: relative;
-    left: 50px;
+    left: -5px;
     margin-top: 5px;
+}
+
+.add-btn {
+    position: relative;
+    left: -5px;
+    /* bottom: 100px; */
 }
 /* .profile-container  {
     color: #00a2ff;
@@ -263,8 +282,7 @@ nav {
 
 .profile-pic-big {
     border-radius: 8px;
-    width: 250px;
-    height: 350px;
+    max-width: 250px;
     margin-top: 10px;
     padding: 5px;
     position: relative;
@@ -286,10 +304,10 @@ nav {
 } */
 
 .bio {
-    left: 180px;
+    left: 205px;
     font-style: italic;
 
-    text-align: center;
+    text-align: left;
     padding-left: 100px;
     padding-right: 100px;
     font-size: 18px;
@@ -297,12 +315,12 @@ nav {
     flex-direction: column;
     position: relative;
     bottom: 250px;
-    width: 600px;
+    max-width: 600px;
 }
 
 .txt-area-bio {
     position: relative;
-    left: 50px;
+    left: -5px;
     height: 100px;
     width: 500px;
     border: 1px dotted black;
@@ -343,16 +361,16 @@ button {
     border-radius: 3px;
 }
 
-/* friends component */
+/******************************* friends component *******************/
 
 .friends-wrapper {
+    margin-top: 5px;
     display: flex;
     flex-direction: column;
     position: relative;
     left: 20%;
     z-index: 100;
     width: 50%;
-    /* justify-content: space-around; */
 }
 
 .friends-box {
@@ -364,7 +382,7 @@ button {
     background-color: white;
     margin: 0 auto;
     width: 600px;
-    padding-top: 90px;
+    padding-top: 16px;
     font-size: 20px;
 }
 
@@ -434,6 +452,13 @@ button {
     height: 85px;
     /* left: 20px; */
     border-radius: 85px;
+}
+
+.chat-btn {
+    position: relative;
+    left: 250px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .sender-info {
@@ -542,10 +567,6 @@ button {
     color: #00a2ff;
 }
 
-.post-div {
-    margin-bottom: 50px;
-}
-
 .btn-wall {
     position: relative;
     top: 30px;
@@ -573,10 +594,11 @@ textarea {
     margin-bottom: 15px;
     padding: 20px;
     padding-bottom: 40px;
-    width: 700px;
-    background-color: lightgray;
+    width: 859px;
+    background-color: #fff;
     position: relative;
-    left: 340px;
+    left: 260px;
+    border-radius: 4px;
 }
 
 .search-bar {
@@ -640,7 +662,18 @@ textarea {
     /* border: 1px solid black; */
 }
 
+/* display: inline-flex;
+flex-direction: column;
+flex-wrap: wrap; */
+
+.online-users-wrapper {
+}
+
 .online-user-div {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
     color: grey;
     font-size: 15px;
     padding-left: 150px;
@@ -650,4 +683,11 @@ textarea {
     width: 600px;
     padding-top: 90px;
     font-size: 20px;
+    height: 100%;
+}
+
+.online-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

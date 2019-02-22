@@ -67,7 +67,9 @@ export class BioEditor extends React.Component {
                 )}
                 {!this.state.bio && !this.state.isEditorVisible && (
                     <div className="bio">
-                        <button onClick={this.showEditor}>Add your bio</button>
+                        <button className="add-btn" onClick={this.showEditor}>
+                            Add your bio
+                        </button>
                     </div>
                 )}
             </div>

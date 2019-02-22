@@ -1,8 +1,9 @@
 export function reducer(state = {}, action) {
     if (action.type == "RECEIVE_FRIENDS_WANNABEES") {
         // console.log("in reducer now");
-        const state = { ...state, friendsList: action.list };
-        return state;
+        return { ...state, friendsList: action.list };
+        // console.log("this is state from reducer", state);
+        // return state;
     }
     if (action.type == "ACCEPT_FRIEND_REQUEST") {
         return {
@@ -31,16 +32,17 @@ export function reducer(state = {}, action) {
     }
 
     if (action.type == "ONLINE_USERS") {
-        console.log("action.onlineUsersList", action.onlineUsersList);
+        // console.log("action.onlineUsersList", action.onlineUsersList);
         state = {
             ...state,
             onlineUsers: action.onlineUsersList
         };
-        console.log("state from reducer: ", state);
+        // console.log("state from reducer: ", state);
         return state;
     }
 
     if (action.type == "USER_WHO_JOINED") {
+        // console.log("action.jooned", action.joined);
         state = {
             ...state,
             onlineUsers: state.onlineUsers.concat(action.joined)
@@ -49,10 +51,13 @@ export function reducer(state = {}, action) {
     }
 
     if (action.type == "USER_WHO_LEFT") {
+        // console.log("action.leftUser", action.leftUser);
         state = {
             ...state,
             onlineUsers: state.onlineUsers.filter(i => {
-                if (i.leftUser == action.leftUser) {
+                console.log("------------i", i.id);
+                if (i.id == action.leftUser) {
+                    console.log("*********************************");
                     return false;
                 } else {
                     return true;
@@ -100,6 +105,6 @@ export function reducer(state = {}, action) {
     //             number: state.number
     //         };
     //     }
-    //     console.log("reducer state: ", state);
-    //     return state;
+    console.log("reducer state: ", state);
+    return state;
 }

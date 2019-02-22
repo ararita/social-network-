@@ -19,6 +19,7 @@ class ChatMessages extends React.Component {
         this.elem.scrollTop = this.elem.scrollHeight;
     }
     componentDidMount() {
+        console.log("logging from wall component");
         if (!this.elem) {
             return null;
         }
@@ -95,7 +96,9 @@ class ChatMessages extends React.Component {
                         value={this.state.textOfMessage}
                         onChange={this.handleChange}
                     />
-                    <button onClick={this.sendMessage}>SEND MESSAGE</button>
+                    <button onClick={this.sendMessage} className="chat-btn">
+                        SEND MESSAGE
+                    </button>
                 </div>
             </div>
         );
@@ -103,9 +106,9 @@ class ChatMessages extends React.Component {
 }
 
 const mapStateToProps = function(state) {
-    if (!state) {
-        return null;
-    }
+    // if (!state) {
+    //     return null;
+    // }
     return {
         chatMessages: state.chatMessages
     };
