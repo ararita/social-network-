@@ -225,26 +225,28 @@ nav {
 /* profile component:  */
 .profile-container {
     display: flex;
-    width: 50%;
+    width: 1000px;
     position: relative;
-    left: 25%;
-    /* justify-content: initial; */
+    left: 200px;
     flex-direction: column;
     color: grey;
     /* width: 50%; */
-    /* height: 500px; */
+    height: 100%;
     border-radius: 5px;
     box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3);
     font-size: 20px;
     padding: 10px;
     /* overflow: scroll; */
-    text-align: center;
+    /* text-align: center; */
     background-color: white;
     /* background: linear-gradient(#86d6e7, #c9e8ee); */
-
     /* background: linear-gradient(#86d6e7, #c9e8ee); */
 }
-
+.save-btn {
+    position: relative;
+    left: 50px;
+    margin-top: 5px;
+}
 /* .profile-container  {
     color: #00a2ff;
     text-decoration: underline;
@@ -265,13 +267,16 @@ nav {
     height: 350px;
     margin-top: 10px;
     padding: 5px;
+    position: relative;
+    bottom: 62px;
 }
 
 .profile-name {
-    display: block;
+    position: relative;
+    left: 300px;
     height: 10px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 40px;
 }
 /*
 .profile-info button {
@@ -281,13 +286,29 @@ nav {
 } */
 
 .bio {
+    left: 180px;
     font-style: italic;
-    /* max-width: 250px; */
-    width: 80%;
+
     text-align: center;
     padding-left: 100px;
     padding-right: 100px;
     font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    bottom: 250px;
+    width: 600px;
+}
+
+.txt-area-bio {
+    position: relative;
+    left: 50px;
+    height: 100px;
+    width: 500px;
+    border: 1px dotted black;
+    border-radius: 3px;
+    font-style: italic;
+    font-size: 20px;
 }
 
 .bio-editor-wrapper {
@@ -360,9 +381,10 @@ button {
 .friend-info-div {
     display: inline-flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
+    /* justify-content: space-between; */
+    /* align-items: flex-start; */
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .each-div {
@@ -404,19 +426,46 @@ button {
     font-size: 20px;
     position: relative;
     left: 20px;
+    margin-top: 15px;
 }
 
 .chatMessagesContainer img {
     width: 85px;
     height: 85px;
-    left: 20px;
+    /* left: 20px; */
     border-radius: 85px;
-    border: #00a2ff;
-    top: 20px;
-    left: 92%;
 }
 
-.chatmessage-item {
+.sender-info {
+    display: inline-flex;
+
+    justify-content: space-between;
+    align-items: center;
+    color: grey;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.sender-info img {
+    padding-right: 5px;
+}
+
+.message-content p {
+    color: grey;
+}
+
+.message-sender {
+    padding: 5px;
+}
+
+.chatMessageItem {
+    border: solid lightgrey 0.5px;
+    border-radius: 2px;
+    margin: 15px;
+    padding: 15px;
+}
+
+/* .chatmessage-item {
     margin: 10px auto;
     color: grey;
     width: 600px;
@@ -429,7 +478,7 @@ button {
     display: flex;
     /* flex-wrap: wrap;
     border: 1px solid darkgrey; */
-}
+/* } */
 
 .chatMessageInput {
     display: flex;
@@ -592,8 +641,13 @@ textarea {
 }
 
 .online-user-div {
+    color: grey;
+    font-size: 15px;
+    padding-left: 150px;
+    padding-right: 150px;
     background-color: white;
-    width: 150px;
     margin: 0 auto;
-    text-align: center;
+    width: 600px;
+    padding-top: 90px;
+    font-size: 20px;
 }

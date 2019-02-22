@@ -23,23 +23,23 @@ export default class Header extends React.Component {
                 />
                 <nav>
                     <Link to="/home" className="links">
-                        HOME
+                        Home
                     </Link>
                     <Link to="/friends" className="links">
-                        FRIENDS
+                        Friends
                     </Link>
                     <Link to="/chat" className="links">
-                        CHAT
+                        Chat
                     </Link>
 
                     <Link to="/" className="links">
-                        PROFILE
+                        Profile
                     </Link>
                     <Link to="/onlineusers" className="links">
-                        ONLINE USERS
+                        Online users
                     </Link>
                     <a href="/logout" className="links">
-                        LOGOUT
+                        Logout
                     </a>
                 </nav>
             </div>

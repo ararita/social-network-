@@ -43,10 +43,13 @@ export class BioEditor extends React.Component {
                 {this.state.isEditorVisible && (
                     <div className="bio">
                         <textarea
+                            className="txt-area-bio"
                             onChange={this.handleBioChange}
                             value={this.state.bio}
                         />
-                        <button onClick={this.updateBio}>save</button>
+                        <button className="save-btn" onClick={this.updateBio}>
+                            save
+                        </button>
                     </div>
                 )}
                 {this.state.bio && !this.state.isEditorVisible && (
