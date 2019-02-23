@@ -27,7 +27,7 @@ class OnlineUsers extends React.Component {
                                 />
                                 <Link to={`/user/${user.id}`}>
                                     <p>
-                                        {user.first}
+                                        {user.first} {""}
                                         {user.last}
                                     </p>
                                 </Link>
