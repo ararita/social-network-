@@ -28,26 +28,15 @@ export default class App extends React.Component {
         this.onUpdateBio = this.onUpdateBio.bind(this);
         this.showMusicPlayer = this.showMusicPlayer.bind(this);
         this.hidePlayerModal = this.hidePlayerModal.bind(this);
-
-        // this.changePictureUrl = this.changePictureUrl.bind(this);---pitaj sta znaci
     }
 
-    //this is equivalent of vue mounted
-    //a lifecycle method
     componentDidMount() {
         axios
             .get("/user")
-            //umjesto first: response.data.first,
-            // last: response.data.last,
-            // id: response.data.id,
-            // profilePicUrl: response.data.url mozda je bolje (({ data })) u setState
             .then(({ data }) => {
                 console.log("data: ", data);
-                //same as response.data, under
                 this.setState(
                     {
-                        //this is an object
-                        //this is one way to do it, but we will use (({data}))
                         first: data.first,
                         last: data.last,
                         id: data.id,
@@ -108,7 +97,6 @@ export default class App extends React.Component {
                         first={this.state.first}
                         last={this.state.last}
                     />
-                    {/* <FriendNotifications />*/}
                     <div>
                         {this.state.uploaderIsVisible && (
                             <Uploader

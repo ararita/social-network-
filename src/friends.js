@@ -118,7 +118,6 @@ const mapStateToProps = function(state) {
     if (!state) {
         return null;
     }
-    // console.log("state in mapStateToProps: ", state);
     if (!state.friendsList) {
         return {};
     } else {

@@ -64,7 +64,6 @@ main {
 
 h1 {
     color: #00a2ff;
-    /* font-family: monospace; */
     font-weight: lighter;
     font-size: 32px;
 }
@@ -86,9 +85,6 @@ h1 {
 .modal button {
     position: absolute;
     top: 127px;
-    /* right: 10px; */
-    /* width: 50px; */
-    /* height: 20px; */
     text-align: center;
     border-radius: 2px;
     width: 100px;
@@ -205,7 +201,6 @@ input {
     font-size: 25px;
     text-decoration: none;
     color: #00a2ff;
-    /* border-right: solid 0.5px #00a2ff; */
 }
 
 .links:hover {
@@ -242,17 +237,12 @@ nav {
     left: 200px;
     flex-direction: column;
     color: grey;
-    /* width: 50%; */
     height: 100%;
     border-radius: 5px;
     box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3);
     font-size: 20px;
     padding: 10px;
-    /* overflow: scroll; */
-    /* text-align: center; */
     background-color: white;
-    /* background: linear-gradient(#86d6e7, #c9e8ee); */
-    /* background: linear-gradient(#86d6e7, #c9e8ee); */
 }
 .save-btn {
     position: relative;
@@ -262,14 +252,9 @@ nav {
 
 .add-btn {
     position: relative;
+    top: 30px;
     left: -5px;
-    /* bottom: 100px; */
 }
-/* .profile-container  {
-    color: #00a2ff;
-    text-decoration: underline;
-    font-weight: lighter;
-} */
 
 .profile-info {
     display: flex;
@@ -295,12 +280,6 @@ nav {
     font-weight: bold;
     font-size: 40px;
 }
-/*
-.profile-info button {
-    position: absolute;
-    top: 270px;
-    right: 148px;
-} */
 
 .bio {
     left: 205px;
@@ -313,7 +292,7 @@ nav {
     display: flex;
     flex-direction: column;
     position: relative;
-    bottom: 250px;
+    bottom: 210px;
     max-width: 600px;
 }
 
@@ -337,16 +316,11 @@ nav {
 }
 
 .bio-info {
-    /* color: white; */
     font-weight: bold;
 }
 
 .update-button-div {
 }
-
-/* .bioeditor-wrapper {
-    width: 20%;
-} */
 
 button:hover {
     border-color: #ff0100;
@@ -385,10 +359,6 @@ button {
     font-size: 20px;
 }
 
-.friends-box:hover {
-    /* transform: scale(1.03); */
-}
-
 .friends-box a {
     font-size: 20px;
     text-decoration: none;
@@ -398,8 +368,6 @@ button {
 .friend-info-div {
     display: inline-flex;
     flex-direction: column;
-    /* justify-content: space-between; */
-    /* align-items: flex-start; */
     flex-wrap: wrap;
     align-items: center;
 }
@@ -418,22 +386,8 @@ button {
     border-radius: 50%;
 }
 
-/* .friend-btn {
-    position: relative;
-    left: 10%;
-} */
 /* chatmessages component */
 .chatMessagesContainer {
-    /* margin: 10px auto;
-    display: flex;
-    color: grey;
-    width: 50%;
-    border-radius: 5px;
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3);
-    font-size: 20px;
-    padding: 10px;
-    flex-direction: column;
-    background-color: white; */
     padding-left: 150px;
     padding-right: 150px;
     background-color: white;
@@ -449,7 +403,6 @@ button {
 .chatMessagesContainer img {
     width: 85px;
     height: 85px;
-    /* left: 20px; */
     border-radius: 85px;
 }
 
@@ -462,7 +415,6 @@ button {
 
 .sender-info {
     display: inline-flex;
-
     justify-content: space-between;
     align-items: center;
     color: grey;
@@ -488,21 +440,6 @@ button {
     margin: 15px;
     padding: 15px;
 }
-
-/* .chatmessage-item {
-    margin: 10px auto;
-    color: grey;
-    width: 600px;
-    height: 60vh;
-    border-radius: 5px;
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3);
-    font-size: 15px;
-    padding: 10px;
-    padding: 30px;
-    display: flex;
-    /* flex-wrap: wrap;
-    border: 1px solid darkgrey; */
-/* } */
 
 .chatMessageInput {
     display: flex;
@@ -540,8 +477,6 @@ button {
 }
 
 .wallpost-children {
-    /* display: flex;
-    flex-direction: column; */
     padding-left: 150px;
     padding-right: 150px;
     background-color: white;
@@ -651,21 +586,12 @@ textarea {
     position: absolute;
     z-index: -10;
     height: 100px;
-    /* border: 1px solid black; */
 }
 
 .front-state {
     position: fixed;
     z-index: 10;
     height: 100px;
-    /* border: 1px solid black; */
-}
-
-/* display: inline-flex;
-flex-direction: column;
-flex-wrap: wrap; */
-
-.online-users-wrapper {
 }
 
 .online-user-div {

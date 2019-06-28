@@ -102,11 +102,9 @@ app.post("/register", (req, res) => {
             req.session.userId = dbResult.rows[0].id;
             req.session.first = req.body.first;
             req.session.last = req.body.last;
-
-            console.log("req.session.userId ", req.session.userId);
-            console.log("req.sess.first", req.session.first);
-            console.log("req.session.last", req.session.last);
-
+            // console.log("req.session.userId ", req.session.userId);
+            // console.log("req.sess.first", req.session.first);
+            // console.log("req.session.last", req.session.last);
             res.json({ success: true });
         })
         .catch(err => {
@@ -168,12 +166,11 @@ app.post("/bio", (req, res) => {
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     let userId = req.session.userId;
-
-    // console.log("POST /upload");
-    // console.log("req body: ", req.body);
-    // console.log("req file: ", req.file);
+    console.log("POST /upload");
+    console.log("req body: ", req.body);
+    console.log("req file: ", req.file);
     db.addImage(userId, config.s3Url + req.file.filename).then(({ rows }) => {
-        // console.log("rows in image upload: ", rows);
+        console.log("rows in image upload: ", rows);
         req.session.url = rows[0].url;
         res.json(rows[0]);
     });
@@ -191,7 +188,6 @@ app.get("/initial-friendship-status/:id", (req, res) => {
             res.json(dbResult.rows[0]);
         }
     );
-    //req.params.id je user koji nismo mi
 });
 
 app.post("/initial-friendship-status/:id/add-friend", (req, res) => {

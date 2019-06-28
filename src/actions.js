@@ -2,7 +2,6 @@ import axios from "./axios";
 
 export function receiveFriendsWannabes() {
     return axios.get("/friends/list").then(results => {
-        console.log("results from /friendslist:", results);
         return {
             type: "RECEIVE_FRIENDS_WANNABEES",
             list: results.data.rows

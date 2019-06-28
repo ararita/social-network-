@@ -5,13 +5,13 @@ let secrets;
 if (process.env.NODE_ENV == "production") {
     secrets = process.env; // in prod the secrets are environment variables
 } else {
-    secrets = require("./secrets.json"); // secrets.json is in .gitignore
+    secrets = require("./secrets.json");
 }
 
 const client = knox.createClient({
     key: secrets.AWS_KEY,
     secret: secrets.AWS_SECRET,
-    bucket: "spicedling"
+    bucket: "anankes-thread"
 });
 
 module.exports.upload = (req, res, next) => {
@@ -30,7 +30,7 @@ module.exports.upload = (req, res, next) => {
     s3Request.on("response", s3Response => {
         if (s3Response.statusCode == 200) {
             next();
-            fs.unlink(req.file.path, x => x); //callback that doesnt do anything
+            fs.unlink(req.file.path, x => x);
         } else {
             console.log(s3Response.statusCode);
             res.sendStatus(500);
