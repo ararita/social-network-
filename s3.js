@@ -16,7 +16,7 @@ const client = knox.createClient({
 
 module.exports.upload = (req, res, next) => {
     if (!req.file) {
-        console.log("mutler failed");
+        // console.log("multer failed");
         return res.sendStatus(500);
     }
     const s3Request = client.put(req.file.filename, {
@@ -32,11 +32,9 @@ module.exports.upload = (req, res, next) => {
             next();
             fs.unlink(req.file.path, x => x);
         } else {
-            console.log(s3Response.statusCode);
+            // console.log(s3Response.statusCode);
             res.sendStatus(500);
         }
-        // res.json({
-        //     success: wasSuccessful
-        // });
+        
     });
 };

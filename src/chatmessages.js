@@ -19,7 +19,7 @@ class ChatMessages extends React.Component {
         this.elem.scrollTop = this.elem.scrollHeight;
     }
     componentDidMount() {
-        console.log("logging from wall component");
+        // console.log("logging from wall component");
         if (!this.elem) {
             return null;
         }

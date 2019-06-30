@@ -17,7 +17,7 @@ const store = createStore(
 let renderStuff;
 
 if (location.pathname == "/welcome") {
-    console.log("welcome works");
+    // console.log("welcome works");
     renderStuff = <Welcome />;
 } else {
     initSocket(store);
@@ -31,5 +31,5 @@ if (location.pathname == "/welcome") {
 ReactDOM.render(
     renderStuff,
     document.querySelector("main")
-    //ovaj main je main iz htmla, to je root
+    //main from html, to je root
 );

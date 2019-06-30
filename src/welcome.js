@@ -1,8 +1,5 @@
 import React from "react";
 import Logo from "./logo";
-
-// import axios from "./axios";
-// import ReactDOM from "react-dom";
 import { Register } from "./register";
 import { Login } from "./login";
 

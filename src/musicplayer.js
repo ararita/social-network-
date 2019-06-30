@@ -1,10 +1,9 @@
 import _ from "lodash";
 import React, { Component } from "react";
-// import ReactDOM from "react-dom";
 import YTSearch from "youtube-api-search";
 import SearchBar from "./search_bar";
 import VideoDetail from "./video_detail";
-const API_KEY = "AIzaSyDWddyivdYCxyNrZK_6aAd9dUHL3oOxMO0";
+const API_KEY = "AIzaSyAhvGeIDq7_Bjfvco8GmNups8bOkPZrOYs";
 
 class MusicPlayer extends Component {
     constructor(props) {
@@ -14,8 +13,6 @@ class MusicPlayer extends Component {
             videos: [],
             selectedVideo: null
         };
-
-        // this.videoSearch("mayalaitdecoco");
     }
 
     videoSearch(term) {

@@ -42,7 +42,7 @@ export function reducer(state = {}, action) {
     }
 
     if (action.type == "USER_WHO_JOINED") {
-        // console.log("action.jooned", action.joined);
+        // console.log("action.joined", action.joined);
         state = {
             ...state,
             onlineUsers: state.onlineUsers.concat(action.joined)
@@ -55,9 +55,7 @@ export function reducer(state = {}, action) {
         state = {
             ...state,
             onlineUsers: state.onlineUsers.filter(i => {
-                console.log("------------i", i.id);
                 if (i.id == action.leftUser) {
-                    console.log("*********************************");
                     return false;
                 } else {
                     return true;
@@ -98,13 +96,6 @@ export function reducer(state = {}, action) {
         return state;
     }
 
-    //--------------friend reqest notification: --------finish it:
-    //     if (action.type == "RECEIVE_FRIEND_REQUESTS") {
-    //         state = {
-    //             ...state,
-    //             number: state.number
-    //         };
-    //     }
-    console.log("reducer state: ", state);
+    // console.log("reducer state: ", state);
     return state;
 }

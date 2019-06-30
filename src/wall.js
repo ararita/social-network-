@@ -2,13 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import axios from "./axios";
 import { initSocket } from "./socket";
-// import { addWallMessage } from "./actions";
-// import ProfilePic from "./profilepic";
-// import { Link } from "react-router-dom";
-
-// import MediaCard from "./mediacard";
-// import Paper from "@material-ui/core/Paper";
-
 class Wall extends React.Component {
     constructor(props) {
         super(props);
@@ -40,29 +33,14 @@ class Wall extends React.Component {
                 wallPost: [results.data[0], ...this.state.wallPost]
             });
             this.wallInput.value = "";
-            // console.log("this.state.wallPost:", this.state.wallPost);
-            // });
-            // console.log("results.data", results.data);
-            // let wallPostResults = results.data;
-            // wallPostResults.forEach(item => {
-            //     this.setState({ wallPost: item });
-            //     console.log("wallPost: ", this.state.wallPost);
-
-            // this.state.wallPost.map(item => {
-            //     console.log("item in wallPost:", item);
-            //     console.log("results in submitToWall:", results);
-            // });
-
-            // this.setState({ wallPost: results.data });
-            // console.log("this is submitToWall results: ", results);
-            // console.log("this is wallpost: ", this.state.wallPost);
-            // });
+            
+            
         });
     }
-    //inside of then, instead of set state, dispatch the message; the gold is to take the message thats inserted in database, and put it in redux;
+
     componentDidMount() {
         axios.get("/getWallPosts").then(result => {
-            console.log("result in /getwallposts:", result);
+            // console.log("result in /getwallposts:", result);
             this.setState({ wallPost: result.data });
         });
     }
@@ -114,14 +92,13 @@ class Wall extends React.Component {
                         })}
                     </div>
                 )}
-                {/*// <MediaCard wallPost={this.state.wallPost} />*/}
             </div>
         );
     }
 }
 
 const mapStateToProps = function(state) {
-    console.log("state in wall component", state);
+    // console.log("state in wall component", state);
     return { posts: state.posts };
 };
 export default connect(mapStateToProps)(Wall);

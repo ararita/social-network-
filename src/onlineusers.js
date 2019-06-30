@@ -1,12 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-// import { allOnlineUsers } from "./actions";
 
 class OnlineUsers extends React.Component {
     constructor(props) {
         super(props);
-        // this.state = {};
     }
 
     render() {
@@ -14,7 +12,7 @@ class OnlineUsers extends React.Component {
         if (!onlineUsers) {
             return null;
         }
-        console.log(onlineUsers);
+        // console.log(onlineUsers);
         const listOnlineUsers = (
             <div className="online-users-wrapper">
                 {onlineUsers.map((user, i) => {
@@ -53,7 +51,7 @@ const mapStateToProps = function(state) {
     if (!state) {
         return null;
     }
-    console.log("this is state: ", state);
+    // console.log("this is state: ", state);
     if (!state.onlineUsers) {
         return {};
     } else {

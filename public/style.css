@@ -349,7 +349,6 @@ button {
 .friends-box {
     color: grey;
     font-size: 15px;
-
     padding-left: 150px;
     padding-right: 150px;
     background-color: white;
@@ -386,7 +385,7 @@ button {
     border-radius: 50%;
 }
 
-/* chatmessages component */
+/************************* chatmessages component ************************/
 .chatMessagesContainer {
     padding-left: 150px;
     padding-right: 150px;
@@ -468,7 +467,7 @@ button {
     padding: 5px;
 }
 
-/* ------------------- wall--------*/
+/*************************** wall ********************/
 .wallpost-div {
     display: flex;
     flex-direction: column;
@@ -580,7 +579,7 @@ textarea {
     font-size: 17px;
 }
 
-/* player modal */
+/******************* player modal ****************************/
 
 .back-state {
     position: absolute;

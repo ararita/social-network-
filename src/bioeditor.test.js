@@ -49,5 +49,3 @@ test('Clicking the "Save" button causes an ajax request', () => {
         })
     );
 });
-//
-// 5. When the mock request is successful, the function that was passed as a prop to the component gets called.

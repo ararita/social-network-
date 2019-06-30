@@ -1,7 +1,7 @@
 import React from "React";
 
 export default function ProfilePic(props) {
-    console.log("props in ProfilePic: ", props);
+    // console.log("props in ProfilePic: ", props);
     let imageUrl;
 
     if (props.profilePicUrl) {
@@ -24,9 +24,3 @@ export default function ProfilePic(props) {
     );
 }
 //alt is when the image doesnt render;
-
-// {props.url ? (
-//     <img onClick={props.showUploader} src={props.url} />
-// ) : (
-//     <img onClick={props.showUploader} src={props.profilePicUrl} />
-// )}

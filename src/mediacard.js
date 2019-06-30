@@ -19,7 +19,7 @@ const styles = {
 };
 
 function MediaCard(props) {
-    console.log("props in MediaCARD", props);
+    // console.log("props in MediaCARD", props);
     const { classes } = props;
     return (
         <Card className={classes.card}>

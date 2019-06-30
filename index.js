@@ -18,7 +18,7 @@ const moment = require("moment");
 
 const io = require("socket.io")(server, { origins: "localhost:8080" });
 app.use(function(req, res, next) {
-    console.log(req.url);
+    // console.log(req.url);
     next();
 });
 
@@ -166,9 +166,9 @@ app.post("/bio", (req, res) => {
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     let userId = req.session.userId;
-    console.log("POST /upload");
-    console.log("req body: ", req.body);
-    console.log("req file: ", req.file);
+    // console.log("POST /upload");
+    // console.log("req body: ", req.body);
+    // console.log("req file: ", req.file);
     db.addImage(userId, config.s3Url + req.file.filename).then(({ rows }) => {
         console.log("rows in image upload: ", rows);
         req.session.url = rows[0].url;
@@ -227,12 +227,11 @@ app.get("/friends/list", (req, res) => {
 app.get("/getWallPosts", (req, res) => {
     db.getWallPosts(req)
         .then(dbResult => {
-            console.log("this is result from /getWallPosts: ", dbResult);
-
-            console.log("req.session.userId ", req.session.userId);
-            console.log("req.sess.first", req.session.first);
-            console.log("req.session.last", req.session.last);
-            console.log("req.session.url", req.session.url);
+            // console.log("this is result from /getWallPosts: ", dbResult);
+            // console.log("req.session.userId ", req.session.userId);
+            // console.log("req.sess.first", req.session.first);
+            // console.log("req.session.last", req.session.last);
+            // console.log("req.session.url", req.session.url);
             dbResult.rows.forEach(item => {
                 item.created_at = moment(item.created_at).format(
                     "MMMM Do YYYY, h:mm:ss a"
@@ -272,14 +271,11 @@ io.on("connection", function(socket) {
     if (!socket.request.session || !socket.request.session.userId) {
         return socket.disconnect(true);
     }
-    //this callback function will run whenever user logs in or registers;
-    // socket is an object that represents the socket connection that just happened
-
+    
     //console.log("socket.request.session: ", socket.request.session);
 
     const socketId = socket.id;
     const userId = socket.request.session.userId;
-    // every socket has its on unique id, every time different
     onlineUsers[socket.id] = userId;
 
     //console.log("onlineUsers: ", onlineUsers);
@@ -310,7 +306,7 @@ io.on("connection", function(socket) {
 
     //USER JOINS
     const filteredOwnUserIds = userIds.filter(id => id == userId);
-    console.log("userIds", userIds);
+    // console.log("userIds", userIds);
     if (filteredOwnUserIds.length == 1) {
         db.getJoinedUser(userId)
             .then(dbResults => {
@@ -325,7 +321,7 @@ io.on("connection", function(socket) {
     // USER LEAVES
     socket.on("disconnect", function() {
         delete onlineUsers[socketId];
-        console.log("online users:", onlineUsers);
+        // console.log("online users:", onlineUsers);
         if (Object.values(onlineUsers).indexOf(userId) == -1) {
             io.sockets.emit("userLeft", userId);
         }
@@ -361,19 +357,9 @@ io.on("connection", function(socket) {
             });
     });
 
-    //wall posts
-    // db.getWallPosts()
-    //     .then(dbResults => {
-    //         console.log("results from getWallPosts: ", dbResults.rows);
-    //         socket.emit("wall messages", dbResults.rows);
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //     });
 
     app.post("/wallPost", (req, res) => {
-        // let usersLink = url.parse(req.body.urlPost);
-        console.log("req in /wallPost:", req);
+        // console.log("req in /wallPost:", req);
         request(req.body.urlPost, { json: true }, (err, response, body) => {
             if (err) {
                 return console.log(err);

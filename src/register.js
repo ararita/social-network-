@@ -15,7 +15,7 @@ export class Register extends React.Component {
         this[e.target.name] = e.target.value;
     }
     submit() {
-        console.log("this: ", this);
+        // console.log("this: ", this);
         axios
             .post("/register", {
                 first: this.first,
@@ -24,7 +24,7 @@ export class Register extends React.Component {
                 password: this.password
             })
             .then(({ data }) => {
-                console.log("this is data: ", data);
+                // console.log("this is data: ", data);
 
                 if (data.success) {
                     location.replace("/");

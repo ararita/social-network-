@@ -13,8 +13,6 @@ import { ConnectedChatMessages } from "./chatmessages";
 import Wall from "./wall";
 import PlayerModal from "./playermodal";
 
-// import FriendNotifications from "./friendNotifications";
-
 export default class App extends React.Component {
     constructor(props) {
         super(props);
@@ -34,7 +32,7 @@ export default class App extends React.Component {
         axios
             .get("/user")
             .then(({ data }) => {
-                console.log("data: ", data);
+                // console.log("data: ", data);
                 this.setState(
                     {
                         first: data.first,
@@ -44,7 +42,7 @@ export default class App extends React.Component {
                         bio: data.bio
                     },
                     () => {
-                        console.log("this.state: ", this.state);
+                        // console.log("this.state: ", this.state);
                     }
                 );
             })
